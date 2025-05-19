@@ -1,0 +1,178 @@
+:root {
+    --primary: #2563eb;
+    --accent: #f59e42;
+    --visited: #67e8f9;
+    --bg: #f7fafc;
+    --bg-dark: #18191a;
+    --text: #1a202c;
+    --text-dark: #fff;
+    --card: #fff;
+    --card-dark: #242526;
+    --shadow: 0 2px 12px rgba(0,0,0,0.07);
+    --border-radius: 1.2rem;
+  }
+  
+  body {
+    font-family: 'Segoe UI', 'Roboto', Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    margin: 0;
+    min-height: 100vh;
+    transition: background 0.3s, color 0.3s;
+  }
+  
+  @media (prefers-color-scheme: dark) {
+    body {
+      background: var(--bg-dark);
+      color: var(--text-dark);
+    }
+    .visualizer-card, .controls, .input-form {
+      background: var(--card-dark);
+      color: var(--text-dark);
+    }
+    .input, select, button {
+      background: #222;
+      color: #fff;
+      border-color: #444;
+    }
+  }
+  
+  h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+    font-weight: 700;
+    letter-spacing: -1px;
+  }
+  
+  .visualizer-container {
+    max-width: 650px;
+    margin: 0 auto;
+    padding: 2.5rem 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .input-form {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.75rem;
+    background: var(--card);
+    padding: 1.2rem 1.5rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    margin-bottom: 1rem;
+  }
+  
+  .input, select {
+    padding: 0.65rem 1rem;
+    border: 2px solid var(--primary);
+    border-radius: 0.6rem;
+    font-size: 1rem;
+    margin-right: 0.5rem;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  
+  .input:focus, select:focus {
+    border-color: var(--accent);
+  }
+  
+  button {
+    padding: 0.6rem 1.3rem;
+    background: var(--primary);
+    color: #fff;
+    border: none;
+    border-radius: 0.6rem;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    margin-right: 0.5rem;
+    box-shadow: 0 1px 4px rgba(37,99,235,0.10);
+    transition: background 0.2s;
+  }
+  
+  button:hover, button:focus {
+    background: var(--accent);
+  }
+  
+  .error {
+    color: #f87171;
+    font-size: 0.97rem;
+    margin-left: 0.5rem;
+  }
+  
+  .visualizer-card {
+    width: 100%;
+    background: var(--card);
+    padding: 2rem 0.5rem 1rem 0.5rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    margin-bottom: 1.5rem;
+    display: flex;
+    justify-content: center;
+  }
+  
+  svg {
+    display: block;
+    margin: 0 auto;
+    background: transparent;
+  }
+  
+  /* Node and edge styles */
+  .tree-node circle {
+    stroke: var(--primary);
+    stroke-width: 2.2px;
+    fill: #fff;
+    transition: fill 0.3s;
+  }
+  
+  .tree-node.current circle {
+    fill: var(--accent);
+  }
+  
+  .tree-node.visited circle {
+    fill: var(--visited);
+  }
+  
+  .tree-node text {
+    font-size: 1.15rem;
+    font-weight: bold;
+    fill: var(--primary);
+  }
+  
+  .tree-edge {
+    stroke: #888;
+    stroke-width: 2px;
+  }
+  
+  /* Traversal Order Display */
+  .traversal-output {
+    font-size: 1.17rem;
+    margin-top: 0.8rem;
+    background: var(--card);
+    padding: 0.6rem 1.1rem;
+    border-radius: 0.8rem;
+    font-family: 'JetBrains Mono', 'Fira Mono', monospace;
+    box-shadow: var(--shadow);
+  }
+  
+  .traversal-output strong {
+    color: var(--primary);
+  }
+  
+  /* Responsive */
+  @media (max-width: 700px) {
+    .visualizer-container {
+      padding: 1.2rem 0.3rem;
+    }
+    svg {
+      width: 99vw !important;
+      min-width: 250px;
+    }
+    .visualizer-card {
+      padding: 0.7rem 0.1rem 0.3rem 0.1rem;
+    }
+  }
+  
