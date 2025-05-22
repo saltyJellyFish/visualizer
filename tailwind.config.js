@@ -1,9 +1,64 @@
-/** @type {import('tailwindcss').Config} */
+/** @type {import("tailwindcss").Config} */
 export default {
-  content: [],
+  content: [
+    "./index.html",
+    "./src/**/*.{js,ts,jsx,tsx}",
+  ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        abril: ["Abril Fatface", "cursive"],
+        alegreyaSans: ["Alegreya Sans SC", "sans-serif"],
+        ancizar: ["Ancizar Sans", "sans-serif"],
+        battambang: ["Battambang", "cursive"],
+        exo2: ["Exo 2", "sans-serif"],
+        jetbrains: ["JetBrains Mono", "monospace"],
+        josefin: ["Josefin Sans", "sans-serif"],
+        jost: ["Jost", "sans-serif"],
+        lato: ["Lato", "sans-serif"],
+        montserrat: ["Montserrat", "sans-serif"],
+        noto: ["Noto Sans", "sans-serif"],
+        nunito: ["Nunito", "sans-serif"],
+        quicksand: ["Quicksand", "sans-serif"],
+        raleway: ["Raleway", "sans-serif"],
+        roboto: ["Roboto", "sans-serif"],
+        robotomono: ["Roboto Mono", "monospace"],
+        rubik: ["Rubik", "sans-serif"],
+        worksans: ["Work Sans", "sans-serif"],
+        alegreya: ["Alegreya", "serif"]
+      },
+      fontSize: {
+        "sm": "1vw",
+        "base": "1.25vw",
+        "xl": "1.5vw",
+        "2xl": "3vw",
+        "3xl": "4vw",
+        "4xl": "7vw",
+        "5xl": "10vw",
+        "6xl": "12vw",
+        "7xl": "14vw",
+        "8xl": "16vw",
+        "9xl": "18vw",
+      },
+      padding: {
+        "sm": "0.5vw",
+        "base": "1vw",
+        "xl": "2vw",
+        "2xl": "4vw",
+        "3xl": "6vw",
+        "4xl": "10vw",
+        "5xl": "25vw",
+        "6xl": "70vw",
+      },
+      coloRs: {
+        "primary": "#1E3A8A",
+        "secondary": "#FBBF24",
+        "accent": "#F472B6",
+        "background": "#F9FAFB",
+        "text": "#111827",
+      },
+    }
   },
   plugins: [],
+  
 }
-

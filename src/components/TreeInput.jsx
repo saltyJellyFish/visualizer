@@ -35,12 +35,12 @@ export default function TreeInput({ onSubmit }) {
         autoComplete="off"
       />
       <button
-        className="bg-blue-600 text-white px-4 py-1 rounded hover:bg-blue-700 transition"
+        className="bg-blue-200 text-white px-4 py-1 rounded hover:bg-blue-300 transition"
         type="submit"
       >
         Build Tree
       </button>
-      {error && <div className="text-red-500 ml-2">{error}</div>}
+      {error && <div className="text-red-300 ml-2">{error}</div>}
     </form>
   );
 }

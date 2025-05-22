@@ -1,69 +1,69 @@
-import React, { useState } from "react";
-import TreeInput from "./components/TreeInput";
-import TraversalControls from "./components/TraversalControls";
-import TreeVisualizer from "./components/TreeVisualizer";
-import { buildTree } from "./buildTree";
-import { inorder, preorder, postorder, levelorder } from "./traversals";
+import React from "react";
 
-const traversalFunctions = {
-  inorder,
-  preorder,
-  postorder,
-  levelorder,
-};
+const options = [
+  {
+    title: "Linked Lists",
+    desc: "Visualize array operations like search, insert, delete, and sorting.",
+    link: "/linkedLists",
+  },
+  {
+    title: "Trees",
+    desc: "See traversals and operations for singly, doubly, and circular lists.",
+    link: "/trees",
+  },
+  {
+    title: "Heaps",
+    desc: "Explore traversals, insertions, deletions, and balancing.",
+    link: "/heaps",
+  },
+  {
+    title: "Hash Tables",
+    desc: "Watch BFS, DFS, and shortest path algorithms in action.",
+    link: "/hashTables",
+  },
+  {
+    title: "Graphs",
+    desc: "See traversals and operations for singly, doubly, and circular lists.",
+    link: "/graphs",
+  },
+  {
+    title: "Sorting Algorithms",
+    desc: "Explore traversals, insertions, deletions, and balancing.",
+    link: "/sortingAlgorithms",
+  },
+];
 
-function App() {
-  const [arr, setArr] = useState([]);
-  const [tree, setTree] = useState(null);
-  const [traversalType, setTraversalType] = useState("inorder");
-  const [traversalOrder, setTraversalOrder] = useState([]);
-  const [step, setStep] = useState(0);
-
-  // Build tree on input
-  const handleInput = (arr) => {
-    setArr(arr);
-    const t = buildTree(arr);
-    setTree(t);
-    setTraversalOrder([]);
-    setStep(0);
-  };
-
-  // Recompute traversal order on type change
-  React.useEffect(() => {
-    if (tree) {
-      const order = traversalFunctions[traversalType](tree);
-      setTraversalOrder(order);
-      setStep(0);
-    }
-  }, [tree, traversalType]);
-
-  const handleStep = () => setStep((s) => Math.min(s + 1, traversalOrder.length));
-  const handleSkip = () => setStep(traversalOrder.length);
-
+export default function App() {
   return (
     <div>
-      <h1>Tree Traversal Visualizer</h1>
-      <TreeInput onSubmit={handleInput} />
-      <TraversalControls
-        traversalType={traversalType}
-        setTraversalType={setTraversalType}
-        onStep={handleStep}
-        onSkip={handleSkip}
-        isDisabled={!tree}
-      />
-      <TreeVisualizer
-        tree={tree}
-        highlightIds={traversalOrder.slice(step - 1, step)}
-        visitedIds={traversalOrder.slice(0, step - 1)}
-      />
-      <div>
-        <strong>Traversal order:</strong>{" "}
-        <span>
-          {traversalOrder.slice(0, step).join(", ")}
-        </span>
+      {/* Background Video and Overlay */}
+      <video className="hero-video-bg" autoPlay loop muted playsInline poster="/bg-fallback.jpg">
+        <source src="/hero.mp4" type="video/mp4" />
+      </video>
+      <div className="hero-overlay"></div>
+
+      {/* Hero Section */}
+      <div className="hero-content">
+        <h1 className="hero-title">DSA Visualizer</h1>
+        <div className="hero-desc">
+          Elegant, interactive visualizations for data structures and algorithms.
+        </div>
       </div>
+
+      {/* Options */}
+      <div className="options-grid">
+        {options.map((opt) => (
+          <a className="card" href={opt.link} key={opt.title}>
+            <div className="card-title">{opt.title}</div>
+            <div className="card-desc">{opt.desc}</div>
+          </a>
+        ))}
+      </div>
+
+      {/* Footer */}
+      <footer className="footer">
+        &copy; {new Date().getFullYear()} DSA Visualizer &middot; Designed with React
+      </footer>
     </div>
   );
 }
-
-export default App;
