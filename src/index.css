@@ -1,3 +1,5 @@
+/* index.css */
+
 @import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Alegreya+Sans+SC:ital,wght@0,100;0,300;0,400;0,500;0,700;0,800;0,900;1,100;1,300;1,400;1,500;1,700;1,800;1,900&family=Alegreya:ital,wght@0,400..900;1,400..900&family=Ancizar+Sans:ital,wght@0,100..1000;1,100..1000&family=Battambang:wght@100;300;400;700;900&family=Exo+2:ital,wght@0,100..900;1,100..900&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Jost:ital,wght@0,100..900;1,100..900&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Quicksand:wght@300..700&family=Raleway:ital,wght@0,100..900;1,100..900&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&family=Roboto:ital,wght@0,100..900;1,100..900&family=Rubik:ital,wght@0,300..900;1,300..900&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap');
 
 @tailwind base;
@@ -6,118 +8,145 @@
 
 html, body {
   width: 100vw;
-  max-width: 100vw;
-  overflow-x: hidden;
-  background: #f9f7f3;
+  /*max-width: 100vw; */
+  height: 100%;
+  /*overflow-x: hidden;*/
   min-height: 100vh;
+  margin: 0; 
+  padding: 0;
+  display: flex;
+  flex-direction: column;
 }
-.hero-video-bg {
+/* --- Style for Maze Background Canvas --- */
+#mazeBackgroundCanvas {
   position: fixed;
-  inset: 0;
+  top: 0;
+  left: 0;
   width: 100vw;
   height: 100vh;
-  object-fit: cover;
-  z-index: 0;
+  pointer-events: none;
+  z-Index: 0;
 }
-.hero-overlay {
-  position: fixed;
-  inset: 0;
-  width: 100vw;
-  height: 100vh;
-  background: #ece7da;
-  opacity: 0.7;
-  z-index: 1;
+
+.main-content-wrapper {
+  position: absolute;
+  background: #e8e4d1b1;
+  /*top: 0;*/
+  /*z-index: 2; */
+  min-height: 100vh; /* Ensure it can fill the screen vertically */
+  display: flex;
+  flex-direction: column;
+  align-self: center; /* Center content horizontally */
 }
 .hero-content {
-  position: relative;
-  z-index: 2;
   display: flex;
   flex-direction: column;
   text-align: center;
-  margin: 20rem 20px 20rem 20px;
+  margin: 18rem 20px 20rem 20px; 
+  flex-shrink: 0; /* Prevent hero content from shrinking if options grid is large */
 }
 .hero-title {
   font-family: 'Alegreya Sans SC', 'Montserrat', serif;
-  font-size: clamp(4.5rem, 7.5vw, 9rem);
+  font-size: clamp(4.5rem, 10vw, 9rem);
   font-weight: 800;
-  color: #2c2721;
+  color: #2e495c;
   text-shadow: 0 2px 12px #fffdfa88;
+  z-index: 2;
 }
+
 .hero-desc {
   font-family: 'Ancizar Sans', 'Jost', 'Raleway', sans-serif;
-  font-size: clamp(1.2rem, 2vw, 2rem);
-  color: #2c2721;
-  font-weight: 500;
-  margin-top: 30px;
+  font-size: clamp(1.2rem, 3vw, 2rem);
+  /*background: #153e5a;*/
+  /*background: rgb(63, 143, 185);*/
+  background: -webkit-linear-gradient(50deg, #153e5a, #153e5a, #153e5a,#153e5a,  #153e5a, #153e5a, #e0586e,#153e5a, #153e5a, #153e5a,#e0586e , #153e5a, #153e5a, #153e5a, #153e5a);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+  font-weight: 650;
+  margin-top: 25px;
+  text-shadow: 0 2px 12px #fffdfa4f;
 }
-/* ___________________________________________________________________________________________ */
 .options-grid {
-  position: relative;
-  z-index: 2;
   display: grid;
   grid-template-columns: 1fr;
   gap: 30px;
-  margin: 10vh auto 30vh auto;
-  width: clamp(400px, 45%, 1600px);
+  margin: 0 auto 10vh auto; 
+  padding: 0 20px; 
+  width: clamp(400px, 80%, 1200px); 
+  max-width: 100%;
   justify-items: center;
+  flex-grow: 1; 
 }
 @media (min-width: 700px) {
   .options-grid {
     grid-template-columns: repeat(2, 1fr);
+    width: clamp(600px, 70%, 1400px);
   }
 }
 @media (min-width: 1100px) {
   .options-grid {
     grid-template-columns: repeat(3, 1fr);
+    width: clamp(900px, 60%, 1600px);
   }
 }
 .card {
-  background: #fffdfaeb;
-  border-radius: 1.2rem;
-  box-shadow: 0 4px 24px 0 rgba(35, 35, 35, 0.08);
-  border: 1px solid #f3ede2;
+  background: #f9f7ea;
+  border-radius: 0.8rem;
   cursor: pointer;
   display: flex;
   flex-direction: column;
-  opacity: 0.8;
   aspect-ratio: 1 / 1;
-  max-width: 275px;
+  width: 100%; 
+  max-width: 275px; 
   transition: box-shadow 0.22s, background 0.22s, transform 0.22s, border-color 0.22s;
   justify-content: center;
   text-align: center;
-}
-.card:hover, .card:focus {
-  background: #fffdfaa0;
-  box-shadow: 0 10px 36px 0 rgba(112, 88, 55, 0.16);
-  transform: translateY(-7px) scale(1.05);
-  border-color: #ac8a8a;
+  padding: 1rem; 
+  z-index: 5;
 }
 .card-title {
   font-family: 'Alegreya Sans SC', sans-serif;
-  font-size: clamp(1.5rem, 2.5vw, 2.3rem);
-  color: #2c2721;
-  font-weight: 800;
+  font-size: clamp(1.5rem, 2.8vw, 2.3rem);
+  font-weight: 700;
   transition: color 0.2s;
+  color: #2e495c;
+  margin-bottom: 0.5rem; 
 }
-.card:hover .card-title {
-  color: #4b3d3d;
+.card-gradient-border { 
+  padding: 0; 
+  border-radius: 0.9rem;
+  transition: transform 0.22s, opacity 0.22s, box-shadow 0.22s, padding 0.22s; 
+  display: flex; 
+  width: 100%; 
+  max-width: calc(275px + 4px);
+  justify-content: center; 
+}
+.card-gradient-border:hover {
+  padding: 2.5px; 
+  background: linear-gradient(50deg, #e0586fb7, #2e495ccd 65%, #a0bcffd1);
+  transform: translateY(-7px) scale(1.05);
+  box-shadow: 0 6px 18px rgba(120, 130, 170, 0.3); 
 }
 .card-desc {
-  font-size: clamp(1rem, 1vw, 1.8rem);
-  color: #6a6356;
-  font-family: 'Exo 2', sans-serif;
-  font-weight: 500;
+  font-size: clamp(1rem, 1.35vw, 1.8rem); 
+  font-family: 'Ancizar Sans', sans-serif;
+  font-weight: 650;
   padding: 0 1rem;
-}
-.card:hover .card-desc {
-  color: #4b3d3d;
+  color: #2e495c;
+  line-height: 1.4; 
 }
 .footer {
-  position: absolute;
-  z-index: 2;
-  font-size: x-small;
-  background-color: #f7f3eb8f;
-  width: 100vw;
+  font-size: 0.75rem; 
+  background-color: #a5a39e;
+  width: 100vw; 
+  flex-shrink: 0; 
 }
 
-
+#root { 
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    flex-grow: 1;
+}
