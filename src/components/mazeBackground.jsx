@@ -1,7 +1,7 @@
+/*mazeBackground.jsx */
 import React, { useRef, useEffect } from 'react';
 
-// --- Configuration (with temporary debugging colors) ---
-const PARTICLE_DENSITY_FACTOR = 10000; // higher for fewer particles 
+const PARTICLE_DENSITY_FACTOR = 9000; // higher for fewer particles 
 const MOUSE_ACTIVATION_RADIUS = 60;
 const PARTICLE_ACTIVE_LIFESPAN_MS = 4000;
 const CONNECTION_DISTANCE_LG = 110;
@@ -11,22 +11,20 @@ const RECONFIG_DRIFT_AMOUNT = 1000;
 const RECONFIG_FAR_DRIFT_CHANCE = 0.9;
 const RECONFIG_NEAR_DRIFT_CHANCE = 0.9;
 
-// --- Particle Class ---
 class Particle {
     constructor(x, y, context, canvasWidth, canvasHeight) {
         this.x = x;
         this.y = y;
         this.canvasWidth = canvasWidth;
         this.canvasHeight = canvasHeight;
-        this.size = Math.random() * 3 + 3; // Slightly larger for visibility
+        this.size = Math.random() * 3 + 3; 
 
         this.context = context;
 
-        // Colors (TEMPORARILY BRIGHT FOR DEBUGGING)
-        this.defaultColor = 'rgba(249, 20, 86, 0.35)'; //pink
-        this.lineColorDefault = 'rgba(249, 20, 86, 0.3)'; // pink
-        this.activeColor = 'rgba(61, 140, 200, 0.25)';   // blue
-        this.lineColorActive = 'rgba(61, 140, 200, 0.2)'; // blue
+        this.defaultColor = 'rgba(249, 20, 86, 0.35)'; //p
+        this.lineColorDefault = 'rgba(249, 20, 86, 0.3)'; // p
+        this.activeColor = 'rgba(61, 140, 200, 0.25)';   // b
+        this.lineColorActive = 'rgba(61, 140, 200, 0.2)'; // b
 
         this.isActive = false;
         this.activationTime = 0;
@@ -102,26 +100,26 @@ const MazeBackground = () => {
         console.log("MazeBackground: useEffect triggered"); // DEBUG LOG
         const canvas = canvasRef.current;
         if (!canvas) {
-            console.error("MazeBackground: Canvas element not found!"); // DEBUG LOG
+            console.error("MazeBackground: Canvas element not found!"); 
             return;
         }
         const context = canvas.getContext('2d');
         if (!context) {
-            console.error("MazeBackground: Canvas context not found!"); // DEBUG LOG
+            console.error("MazeBackground: Canvas context not found!"); 
             return;
         }
-        console.log("MazeBackground: Canvas and context obtained."); // DEBUG LOG
+        console.log("MazeBackground: Canvas and context obtained."); 
 
         const setupCanvas = () => {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
-            console.log(`MazeBackground: Canvas resized to ${canvas.width}x${canvas.height}`); // DEBUG LOG
+            console.log(`MazeBackground: Canvas resized to ${canvas.width}x${canvas.height}`); 
         };
 
         const initParticles = () => {
             particlesArrayRef.current = [];
             const numberOfParticles = Math.floor((canvas.width * canvas.height) / PARTICLE_DENSITY_FACTOR);
-            console.log(`MazeBackground: Initializing ${numberOfParticles} particles.`); // DEBUG LOG
+            console.log(`MazeBackground: Initializing ${numberOfParticles} particles.`); 
             for (let i = 0; i < numberOfParticles; i++) {
                 const x = Math.random() * canvas.width;
                 const y = Math.random() * canvas.height;
@@ -147,7 +145,7 @@ const MazeBackground = () => {
         let frameCount = 0; // DEBUG
         const animate = () => {
             if (frameCount < 5) { // Log only for the first few frames
-                 console.log("MazeBackground: animate() called, frame: " + frameCount); // DEBUG LOG
+                 console.log("MazeBackground: animate() called, frame: " + frameCount);
             }
             frameCount++;
 
@@ -175,7 +173,7 @@ const MazeBackground = () => {
                         const opacityBase = 1 - (distance / connectDistance); 
                         context.strokeStyle = isActiveConnection ? p1.lineColorActive : p1.lineColorDefault;
                         context.lineWidth = isActiveConnection ? 4.5 : 1.5; 
-                        context.globalAlpha = isActiveConnection ? opacityBase * 1 : opacityBase * 0.9; // More opaque
+                        context.globalAlpha = isActiveConnection ? opacityBase * 1 : opacityBase * 0.9; 
                         context.stroke();
                     }
                 }
@@ -190,7 +188,7 @@ const MazeBackground = () => {
         animate();
 
         return () => {
-            console.log("MazeBackground: Cleanup function called."); // DEBUG LOG
+            console.log("MazeBackground: Cleanup function called."); // DEBUG 
             if (animationFrameIdRef.current) {
                 cancelAnimationFrame(animationFrameIdRef.current);
             }

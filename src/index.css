@@ -17,9 +17,8 @@ html, body {
   display: flex;
   flex-direction: column;
 }
-/* --- Style for Maze Background Canvas --- */
 #mazeBackgroundCanvas {
-  position: fixed;
+  position: fixed; /*fix this so the opacity of maze elements decreases when they're on top of text or cards*/
   top: 0;
   left: 0;
   width: 100vw;
@@ -29,21 +28,21 @@ html, body {
 }
 
 .main-content-wrapper {
-  position: absolute;
-  background: #e8e4d1b1;
-  /*top: 0;*/
-  /*z-index: 2; */
-  min-height: 100vh; /* Ensure it can fill the screen vertically */
+  position: absolute; 
+  background: #f8f5ea66;
+  top: 0; left: 0; right: 0%;
+  z-index: 4;
+  min-height: 100vh; 
   display: flex;
   flex-direction: column;
-  align-self: center; /* Center content horizontally */
+  align-self: center; 
 }
 .hero-content {
   display: flex;
   flex-direction: column;
   text-align: center;
   margin: 18rem 20px 20rem 20px; 
-  flex-shrink: 0; /* Prevent hero content from shrinking if options grid is large */
+  flex-shrink: 0; 
 }
 .hero-title {
   font-family: 'Alegreya Sans SC', 'Montserrat', serif;
@@ -72,76 +71,85 @@ html, body {
   display: grid;
   grid-template-columns: 1fr;
   gap: 30px;
-  margin: 0 auto 10vh auto; 
+  margin: 0 auto 20vh auto; 
   padding: 0 20px; 
-  width: clamp(400px, 80%, 1200px); 
-  max-width: 100%;
+  /*width: clamp(400px, 90%, 1200px);*/
+  /*max-width: 100%;*/
   justify-items: center;
   flex-grow: 1; 
+  /*align-self: stretch;*/
 }
 @media (min-width: 700px) {
   .options-grid {
     grid-template-columns: repeat(2, 1fr);
-    width: clamp(600px, 70%, 1400px);
+    /*width: clamp(600px, 70%, 1400px);*/
   }
 }
 @media (min-width: 1100px) {
   .options-grid {
     grid-template-columns: repeat(3, 1fr);
-    width: clamp(900px, 60%, 1600px);
+    /*width: clamp(900px, 60%, 1600px);*/
   }
 }
 .card {
-  background: #f9f7ea;
+  background: #eceae298;
   border-radius: 0.8rem;
   cursor: pointer;
   display: flex;
   flex-direction: column;
   aspect-ratio: 1 / 1;
   width: 100%; 
-  max-width: 275px; 
+  max-width: 400px; 
   transition: box-shadow 0.22s, background 0.22s, transform 0.22s, border-color 0.22s;
   justify-content: center;
   text-align: center;
   padding: 1rem; 
-  z-index: 5;
+  z-index: 3;
 }
+.card-gradient-border .card:hover{
+  background: #eceae2db;
+}
+
 .card-title {
   font-family: 'Alegreya Sans SC', sans-serif;
-  font-size: clamp(1.5rem, 2.8vw, 2.3rem);
-  font-weight: 700;
+  font-size: clamp(1.7rem, 3.8vw, 2.6rem);
+  font-weight: 670;
   transition: color 0.2s;
   color: #2e495c;
-  margin-bottom: 0.5rem; 
 }
 .card-gradient-border { 
   padding: 0; 
   border-radius: 0.9rem;
   transition: transform 0.22s, opacity 0.22s, box-shadow 0.22s, padding 0.22s; 
   display: flex; 
-  width: 100%; 
-  max-width: calc(275px + 4px);
+  width: 100%;
+  max-width: calc(275px);
   justify-content: center; 
+  z-index:4;
 }
 .card-gradient-border:hover {
-  padding: 2.5px; 
+  padding: 2.5px;
   background: linear-gradient(50deg, #e0586fb7, #2e495ccd 65%, #a0bcffd1);
-  transform: translateY(-7px) scale(1.05);
+  transform: translateY(15px) translateX(15px) scale(1.2);
   box-shadow: 0 6px 18px rgba(120, 130, 170, 0.3); 
+  z-index:5; 
 }
 .card-desc {
-  font-size: clamp(1rem, 1.35vw, 1.8rem); 
+  font-size: clamp(1.1rem, 1.35vw, 1.3rem); 
   font-family: 'Ancizar Sans', sans-serif;
   font-weight: 650;
   padding: 0 1rem;
   color: #2e495c;
-  line-height: 1.4; 
+  /*line-height: 1.4; */
 }
 .footer {
+  position: fixed;
+  bottom: 0;
   font-size: 0.75rem; 
   background-color: #a5a39e;
   width: 100vw; 
   flex-shrink: 0; 
+  z-index: 10;
 }
 
 #root { 
