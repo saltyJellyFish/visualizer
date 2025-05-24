@@ -26,8 +26,7 @@ html, body {
   pointer-events: none;
   z-Index: 0;
 }
-
-.main-content-wrapper {
+.mainContentWrapper {
   position: absolute; 
   background: #f8f5ea66;
   top: 0; left: 0; right: 0%;
@@ -37,14 +36,14 @@ html, body {
   flex-direction: column;
   align-self: center; 
 }
-.hero-content {
+.heroContent {
   display: flex;
   flex-direction: column;
   text-align: center;
   margin: 18rem 20px 20rem 20px; 
   flex-shrink: 0; 
 }
-.hero-title {
+.heroTitle {
   font-family: 'Alegreya Sans SC', 'Montserrat', serif;
   font-size: clamp(4.5rem, 10vw, 9rem);
   font-weight: 800;
@@ -52,13 +51,12 @@ html, body {
   text-shadow: 0 2px 12px #fffdfa88;
   z-index: 2;
 }
-
-.hero-desc {
+.heroDesc {
   font-family: 'Ancizar Sans', 'Jost', 'Raleway', sans-serif;
   font-size: clamp(1.2rem, 3vw, 2rem);
-  /*background: #153e5a;*/
+  /*background: #2e495c;*/
   /*background: rgb(63, 143, 185);*/
-  background: -webkit-linear-gradient(50deg, #153e5a, #153e5a, #153e5a,#153e5a,  #153e5a, #153e5a, #e0586e,#153e5a, #153e5a, #153e5a,#e0586e , #153e5a, #153e5a, #153e5a, #153e5a);
+  background: -webkit-linear-gradient(50deg, #2e495c, #2e495c, #2e495c,#2e495c,  #2e495c, #2e495c, #e0586e,#2e495c, #2e495c, #2e495c,#e0586e , #2e495c, #2e495c, #2e495c, #2e495c);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -67,7 +65,7 @@ html, body {
   margin-top: 25px;
   text-shadow: 0 2px 12px #fffdfa4f;
 }
-.options-grid {
+.optionsGrid {
   display: grid;
   grid-template-columns: 1fr;
   gap: 30px;
@@ -80,13 +78,13 @@ html, body {
   /*align-self: stretch;*/
 }
 @media (min-width: 700px) {
-  .options-grid {
+  .optionsGrid {
     grid-template-columns: repeat(2, 1fr);
     /*width: clamp(600px, 70%, 1400px);*/
   }
 }
 @media (min-width: 1100px) {
-  .options-grid {
+  .optionsGrid {
     grid-template-columns: repeat(3, 1fr);
     /*width: clamp(900px, 60%, 1600px);*/
   }
@@ -106,18 +104,17 @@ html, body {
   padding: 1rem; 
   z-index: 3;
 }
-.card-gradient-border .card:hover{
-  background: #eceae2db;
+.cardBorder .card:hover{
+  background: #eceae2df;
 }
-
-.card-title {
+.cardTitle {
   font-family: 'Alegreya Sans SC', sans-serif;
-  font-size: clamp(1.7rem, 3.8vw, 2.6rem);
+  font-size: clamp(1.7rem, 3.8vw, 2.35rem);
   font-weight: 670;
   transition: color 0.2s;
   color: #2e495c;
 }
-.card-gradient-border { 
+.cardBorder { 
   padding: 0; 
   border-radius: 0.9rem;
   transition: transform 0.22s, opacity 0.22s, box-shadow 0.22s, padding 0.22s; 
@@ -127,21 +124,23 @@ html, body {
   justify-content: center; 
   z-index:4;
 }
-.card-gradient-border:hover {
+.cardBorder:hover {
   padding: 2.5px;
   background: linear-gradient(50deg, #e0586fb7, #2e495ccd 65%, #a0bcffd1);
   transform: translateY(15px) translateX(15px) scale(1.2);
   box-shadow: 0 6px 18px rgba(120, 130, 170, 0.3); 
   z-index:5; 
+  opacity: 0.9;
 }
-.card-desc {
-  font-size: clamp(1.1rem, 1.35vw, 1.3rem); 
+.cardDesc {
+  font-size: clamp(1.1rem, 1.35vw, 1.2rem); 
   font-family: 'Ancizar Sans', sans-serif;
   font-weight: 650;
   padding: 0 1rem;
   color: #2e495c;
   /*line-height: 1.4; */
 }
+
 .footer {
   position: fixed;
   bottom: 0;
@@ -151,10 +150,13 @@ html, body {
   flex-shrink: 0; 
   z-index: 10;
 }
-
 #root { 
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-    flex-grow: 1;
+    /*display: flex;*/
+    /*flex-direction: column;*/
+    /*min-height: 100vh;*/
+    /*flex-grow: 1;*/
+  --darkBlue:   #2e495c;
+  --pink:    #e0586f;
+  --background: #e8e4d1b1;
+  --cardbg:   #eceae298;
 }

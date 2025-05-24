@@ -50,12 +50,15 @@ export default {
         "5xl": "25vw",
         "6xl": "70vw",
       },
-      coloRs: {
+      colors: {
         "primary": "#1E3A8A",
         "secondary": "#FBBF24",
         "accent": "#F472B6",
-        "background": "#F9FAFB",
         "text": "#111827",
+        "darkBlue": "#2e495c",
+        "pink": "#e0586f",
+        "background": "#e8e4d1b1",
+        "cardbg": "#eceae298",
       },
     }
   },
