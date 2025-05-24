@@ -1,10 +1,10 @@
 /*mazeBackground.jsx */
 import React, { useRef, useEffect } from 'react';
 
-const PARTICLE_DENSITY_FACTOR = 9000; // higher for fewer particles 
+const PARTICLE_DENSITY_FACTOR = 5000; // higher for fewer particles 
 const MOUSE_ACTIVATION_RADIUS = 60;
-const PARTICLE_ACTIVE_LIFESPAN_MS = 4000;
-const CONNECTION_DISTANCE_LG = 110;
+const PARTICLE_ACTIVE_LIFESPAN_MS = 8000;
+const CONNECTION_DISTANCE_LG = 105;
 const CONNECTION_DISTANCE_SM = 70;
 const RECONFIG_SPEED = 0.0025;
 const RECONFIG_DRIFT_AMOUNT = 1000;
@@ -17,14 +17,14 @@ class Particle {
         this.y = y;
         this.canvasWidth = canvasWidth;
         this.canvasHeight = canvasHeight;
-        this.size = Math.random() * 3 + 3; 
+        this.size = Math.random() * 3 + 3.1; 
 
         this.context = context;
 
         this.defaultColor = 'rgba(249, 20, 86, 0.35)'; //p
         this.lineColorDefault = 'rgba(249, 20, 86, 0.3)'; // p
-        this.activeColor = 'rgba(61, 140, 200, 0.25)';   // b
-        this.lineColorActive = 'rgba(61, 140, 200, 0.2)'; // b
+        this.activeColor = 'rgba(179, 218, 235, 0.65)';   // b
+        this.lineColorActive = 'rgba(143, 201, 162, 0.3)'; // b
 
         this.isActive = false;
         this.activationTime = 0;
@@ -38,7 +38,7 @@ class Particle {
     }
 
     draw() {
-        if (this.pulseFactor > 1.15 || this.pulseFactor < 0.85) {
+        if (this.pulseFactor > 1.1 || this.pulseFactor < 0.95) {
             this.pulseDirection *= -1;
         }
         this.pulseFactor += this.pulseSpeed * this.pulseDirection;
@@ -172,7 +172,7 @@ const MazeBackground = () => {
                         
                         const opacityBase = 1 - (distance / connectDistance); 
                         context.strokeStyle = isActiveConnection ? p1.lineColorActive : p1.lineColorDefault;
-                        context.lineWidth = isActiveConnection ? 4.5 : 1.5; 
+                        context.lineWidth = isActiveConnection ? 4 : 1.5; 
                         context.globalAlpha = isActiveConnection ? opacityBase * 1 : opacityBase * 0.9; 
                         context.stroke();
                     }

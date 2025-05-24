@@ -53,7 +53,7 @@ html, body {
 }
 .heroDesc {
   font-family: 'Ancizar Sans', 'Jost', 'Raleway', sans-serif;
-  font-size: clamp(1.2rem, 3vw, 2rem);
+  font-size: clamp(1.2rem, 3vw, 2.2rem);
   /*background: #2e495c;*/
   /*background: rgb(63, 143, 185);*/
   background: -webkit-linear-gradient(50deg, #2e495c, #2e495c, #2e495c,#2e495c,  #2e495c, #2e495c, #e0586e,#2e495c, #2e495c, #2e495c,#e0586e , #2e495c, #2e495c, #2e495c, #2e495c);
@@ -63,7 +63,7 @@ html, body {
   color: transparent;
   font-weight: 650;
   margin-top: 25px;
-  text-shadow: 0 2px 12px #fffdfa4f;
+  text-shadow: 0 2px 25px  #87c59bf1;
 }
 .optionsGrid {
   display: grid;
