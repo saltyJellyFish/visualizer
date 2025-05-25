@@ -76,7 +76,7 @@ export default function StackVisualizer({ initial = [] }) {
       {/* Stack display (vertical) */}
      <div
         ref={containerRef}
-        className="flex flex-col-reverse items-center gap-3 mt-8"
+        className="flex flex-col-reverse items-center gap-3 mt-8 m-8 p-4"
         style={{ scrollSnapType: 'x mandatory' }}
       >
         <AnimatePresence initial={false}>
@@ -90,10 +90,10 @@ export default function StackVisualizer({ initial = [] }) {
             whileHover={{ y: -5, boxShadow: '0 4px 10px rgba(0,0,0,0.15)' }}
             onHoverStart={() => setHovered(i)}
             onHoverEnd={() => setHovered(null)}
-            className="relative flex-shrink-0 w-20 h-20 bg-backgroundLighter bg-opacity-60 border border-seaGreen border-opacity-45 rounded-full shadow-sm flex items-center justify-center"
+            className="relative flex-shrink-0 w-20 h-20 bg-backgroundLighter bg-opacity-60 border border-seaGreen border-opacity-45 rounded-full shadow-sm flex items-center justify-center text-xl"
             style={{ scrollSnapAlign: 'center' }}
 >
-              <span className="font-ancizar text-lg">{v}</span>
+              <span className="font-ancizar text-xl p-3">{v}</span>
               <motion.span
                 initial={{ scale: 0 }}
                 animate={{ scale: i === highlighted || i === hovered ? 1.4 : 0 }}

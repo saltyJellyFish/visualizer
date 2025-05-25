@@ -90,10 +90,10 @@ export default function QueueVisualizer({ initial = [] }) {
               whileHover={{ y: -5, boxShadow: '0 4px 10px rgba(0,0,0,0.15)' }}
               onHoverStart={() => setHovered(i)}
               onHoverEnd={() => setHovered(null)}
-              className="relative flex-shrink-0 w-20 h-20 bg-backgroundLighter bg-opacity-60 border border-seaGreen border-opacity-45 rounded-full shadow-sm flex items-center justify-center"
+              className="relative flex-shrink-0 w-20 h-20 bg-backgroundLighter bg-opacity-60 border border-seaGreen border-opacity-45 rounded-full shadow-sm flex items-center justify-center text-xl"
               style={{ scrollSnapAlign: 'center' }}
             >
-              <span className="font-ancizar text-lg">{v}</span>
+              <span className="font-ancizar text-xl">{v}</span>
               <motion.span
                 initial={{ scale: 0 }}
                 animate={{ scale: i === highlighted || i === hovered ? 1.4 : 0 }}
