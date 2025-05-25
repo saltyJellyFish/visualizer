@@ -1,8 +1,8 @@
 // src/pages/StacksQueuesPage.jsx
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import StackVisualizer from '../components/StackVisualizer';
-import QueueVisualizer from '../components/QueueVisualizer';
+import { StackVisualizer, QueueVisualizer }
+  from '../components/SQVisualizer.jsx';
 
 export default function StacksQueues() {
   const [mode, setMode] = useState('stack');
