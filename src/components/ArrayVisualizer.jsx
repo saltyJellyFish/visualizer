@@ -111,7 +111,7 @@ const handleDeleteAt = () => {
   return (
     <div className="space-y-6 justify-items-center mb-40">
       {/* Toolbar */}
-      <div className="flex flex-wrap bg-backgroundLighter bg-opacity-50 py-24 rounded-3xl place-content-evenly w-11/12 shadow-md shadow-stone-300 mb-12">
+      <div className="flex flex-wrap bg-backgroundLighter bg-opacity-50 py-24 p-0 mx-0 rounded-3xl place-content-evenly w-11/12 shadow-md shadow-stone-300 mb-12">
 
       <div className="flex flex-wrap bg-gray-700 bg-opacity-25 p-4 rounded-full shadow place-content-evenly w-10/12">
         <input
@@ -126,7 +126,7 @@ const handleDeleteAt = () => {
           placeholder="Index" color='pinkZ'
           value={inputIndex}
           onChange={e => setInputIndex(e.target.value)}
-          className="px-5 py-2 my-1 rounded-full focus:outline-none text-lg"
+          className="px-5 py-2 my-1 mr-6 rounded-full focus:outline-none text-lg"
         />
 
         {/* Action buttons */}
@@ -163,7 +163,7 @@ const handleDeleteAt = () => {
               whileHover = {{ y: -5, boxShadow: '0 4px 10px rgba(0,0,0,0.15)' }}
               onHoverStart={() => setHovered(i)}
               onHoverEnd  ={() => setHovered(null)}
-              className = "relative flex-shrink-0 w-20 h-20 bg-backgroundLighter bg-opacity-40 border border-seaGreen border-opacity-35 rounded-full shadow-sm flex items-center justify-center "
+              className = "relative flex-shrink-0 w-20 h-20 bg-backgroundLighter bg-opacity-40 border border-seaGreen border-opacity-35 rounded-full shadow-sm flex items-center justify-center"
               style={{ scrollSnapAlign: 'center' }}
             >
               <span className="font-ancizar text-xl">{v}</span>

@@ -62,6 +62,7 @@ export default {
         "pink": "#e0586f",
         "background": "#e8e4d1b1",
         "backgroundLighter": "#f8f6ee",
+        "backgroundLighterZ": "#bab6aa",
         "cardbg": "#eceae298",
         "pinkZ": "rgba(249, 20, 86)",
         "blueZ": "rgba(179, 218, 235)",

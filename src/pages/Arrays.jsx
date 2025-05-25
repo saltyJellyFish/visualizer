@@ -3,7 +3,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import ArrayVisualizer from '../components/ArrayVisualizer';
 
-export default function ArraysPage() {
+export default function Arrays() {
   return (
     <div className="mainContentWrapper p-10 font-ancizar">
       <Link to="/" className="text-m text-darkBlue font-semibold hover:underline inline-block">← Back to Home
