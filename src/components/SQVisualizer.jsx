@@ -52,8 +52,8 @@ export function StackVisualizer({ initial = [] }) {
   return (
     <div className="flex flex-col items-center space-y-6 mb-20">
       {/* Toolbar */}
-      <div className="bg-backgroundLighterZ bg-opacity-30 py-24 rounded-3xl w-11/12 shadow-md my-12">
-        <div className="flex flex-wrap bg-gray-700 bg-opacity-30 p-4 rounded-full shadow w-10/12 mx-auto">
+      <div className="bg-backgroundLighterZ bg-opacity-30 py-24 rounded-3xl place-content-evenly w-11/12 shadow-md shadow-stone-300 my-12 justify-items-center">
+        <div className="flex flex-wrap bg-gray-700 bg-opacity-30 p-4 rounded-full shadow place-content-evenly w-10/12">
           {/* Input */}
           <div className="relative inline-block group">
             <input
@@ -137,7 +137,8 @@ export function StackVisualizer({ initial = [] }) {
             {stack.map((v,i) => (
               <motion.div
                 key={i}
-                layout initial={{opacity:0,x:50}} animate={{opacity:1,x:0}}
+                layout initial={{opacity:0,x:50}} 
+                animate={{opacity:1,x:0}}
                 exit={{opacity:0,x:-50}}
                 whileHover={{y:-5,boxShadow:'0 4px 10px rgba(0,0,0,0.15)'}}
                 onHoverStart={()=>setHovered(i)}
