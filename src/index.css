@@ -63,7 +63,7 @@ html, body {
   color: transparent;
   font-weight: 650;
   margin-top: 25px;
-  text-shadow: 0 2px 25px  #87c59bf1;
+  text-shadow: 0 2px 25px  #d6f9e17c;
 }
 .optionsGrid {
   display: grid;
@@ -127,7 +127,7 @@ html, body {
 .cardBorder:hover {
   padding: 2.5px;
   background: linear-gradient(50deg, #e0586fb7, #2e495ccd 65%, #a0bcffd1);
-  transform: translateY(15px) translateX(15px) scale(1.2);
+  transform: translateY(10px) translateX(10px) scale(1.05);
   box-shadow: 0 6px 18px rgba(120, 130, 170, 0.3); 
   z-index:5; 
   opacity: 0.9;
@@ -155,8 +155,16 @@ html, body {
     /*flex-direction: column;*/
     /*min-height: 100vh;*/
     /*flex-grow: 1;*/
-  --darkBlue:   #2e495c;
-  --pink:    #e0586f;
+  --darkBlueZ:   #2e495c;
+  --pinkZ:    #e0586f;
   --background: #e8e4d1b1;
+  --backgroundLighter: #f8f6ee;
   --cardbg:   #eceae298;
+  --blueZ: rgba(179, 218, 235);
+  --greenZ: rgba(143, 201, 162);
+  --lavZ: #d3c5ee;
+  --green: #224c4a;
+  --green: #326c62;
+
+
 }

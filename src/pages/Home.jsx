@@ -50,7 +50,7 @@ const options = [
   },
 ];
 
-export default function HomePage() {
+export default function Home() {
   return (
     <div className="mainContentWrapper">
       <div className="heroContent">

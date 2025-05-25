@@ -28,11 +28,14 @@ export default {
         alegreya: ["Alegreya", "serif"]
       },
       fontSize: {
+        "xs": "0.85vw",
         "sm": "1vw",
         "base": "1.25vw",
+        "lg": "1.1vw",
         "xl": "1.5vw",
         "2xl": "3vw",
         "3xl": "4vw",
+        "3.5xl": "5.5vw",
         "4xl": "7vw",
         "5xl": "10vw",
         "6xl": "12vw",
@@ -58,7 +61,13 @@ export default {
         "darkBlue": "#2e495c",
         "pink": "#e0586f",
         "background": "#e8e4d1b1",
+        "backgroundLighter": "#f8f6ee",
         "cardbg": "#eceae298",
+        "pinkZ": "rgba(249, 20, 86)",
+        "blueZ": "rgba(179, 218, 235)",
+        "greenZ": 'rgba(143, 201, 162)',
+        "darkGreen": "#224c4a",
+        "seaGreen": "#326c62"
       },
     }
   },

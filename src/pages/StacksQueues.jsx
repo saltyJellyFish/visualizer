@@ -1,9 +1,15 @@
 import React from 'react';
+import { Link } from 'react-router-dom';   
 
-export default function StacksQueuesPage() {
+export default function StacksQueues() {
   return (
-    <div className="p-8">
-      <h2 className="text-2xl font-bold text-darkBlue m-4">Stacks and Queues Visualizer</h2>
+    <div className="mainContentWrapper p-8">
+      <Link className="text-2xl text-darkBlue font-bold" to="/">
+        <div className="text-2xl text-darkBlue font-bold">DSA</div>
+      </Link>
+      <h2 className="text-3xl text-darkBlue font-bold place-self-center">
+        Stacks & Queues Visualizer
+      </h2>    
     </div>
   );
 }

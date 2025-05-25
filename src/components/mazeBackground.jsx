@@ -21,10 +21,10 @@ class Particle {
 
         this.context = context;
 
-        this.defaultColor = 'rgba(249, 20, 86, 0.35)'; //p
+        this.defaultColor = 'rgba(249, 20, 86, 0.25)'; //p
         this.lineColorDefault = 'rgba(249, 20, 86, 0.3)'; // p
         this.activeColor = 'rgba(179, 218, 235, 0.65)';   // b
-        this.lineColorActive = 'rgba(143, 201, 162, 0.3)'; // b
+        this.lineColorActive = 'rgba(143, 201, 162, 0.3)'; // g
 
         this.isActive = false;
         this.activationTime = 0;
@@ -172,7 +172,7 @@ const MazeBackground = () => {
                         
                         const opacityBase = 1 - (distance / connectDistance); 
                         context.strokeStyle = isActiveConnection ? p1.lineColorActive : p1.lineColorDefault;
-                        context.lineWidth = isActiveConnection ? 4 : 1.5; 
+                        context.lineWidth = isActiveConnection ? 3.5 : 1.5; 
                         context.globalAlpha = isActiveConnection ? opacityBase * 1 : opacityBase * 0.9; 
                         context.stroke();
                     }
