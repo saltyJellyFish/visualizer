@@ -1,4 +1,6 @@
 // src/components/ArrayVisualizer.jsx
+//Need to fix the operations bar (make it responsive)
+
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 

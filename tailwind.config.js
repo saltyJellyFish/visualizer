@@ -34,6 +34,7 @@ export default {
         "lg": "1.1vw",
         "xl": "1.5vw",
         "2xl": "2vw",
+        "2.5xl": "3vw",
         "3xl": "4vw",
         "3.5xl": "5.5vw",
         "4xl": "7vw",
