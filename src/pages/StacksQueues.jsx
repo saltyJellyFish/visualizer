@@ -12,8 +12,8 @@ export default function StacksQueues() {
       <Link to="/" className="text-m text-darkBlue font-semibold hover:underline inline-block">← Back to Home
       </Link>
       <div className="my-20 flex flex-col items-center">
-        <h1 className="text-4xl text-darkBlue font-bold place-self-center">Stacks & Queues</h1>
-        <p className="text-xl text-darkBlue font-bold place-self-center mt-6"> Choose whether you want to visualize a Stack (LIFO) or a Queue (FIFO).
+        <h1 className="dsaName">Stacks & Queues</h1>
+        <p className="text-2xl text-darkBlue font-bold place-self-center mt-6"> Choose whether you want to visualize a Stack (LIFO) or a Queue (FIFO).
         </p>
         </div>
         {/* Mode toggle */}
@@ -22,7 +22,7 @@ export default function StacksQueues() {
             <button
               key={m}
               onClick={() => setMode(m)}
-              className={`px-12 py-3 rounded-full text-lg font-semibold transition
+              className={`px-12 py-3 rounded-full text-xl font-semibold transition
                 ${mode === m 
                   ? 'bg-seaGreen bg-opacity-80 text-backgroundLighter' 
                   : 'bg-gray-200 text-gray-700 hover:bg-gray-300'}`}

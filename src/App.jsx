@@ -36,5 +36,6 @@ export default function App() {
         &copy; {new Date().getFullYear()} DSA Visualizer &middot; Designed with React
       </footer>
     </BrowserRouter>
-);
+
+  );
 }

@@ -1,203 +1,145 @@
-/*mazeBackground.jsx */
-import React, { useRef, useEffect } from 'react';
+// Enhanced MazeBackground with Focus Mode Toggle Button
+import React, { useRef, useEffect, useState } from 'react';
 
-const PARTICLE_DENSITY_FACTOR = 5000; // higher for fewer particles 
-const MOUSE_ACTIVATION_RADIUS = 60;
-const PARTICLE_ACTIVE_LIFESPAN_MS = 8000;
-const CONNECTION_DISTANCE_LG = 105;
-const CONNECTION_DISTANCE_SM = 70;
-const RECONFIG_SPEED = 0.0025;
-const RECONFIG_DRIFT_AMOUNT = 1000;
-const RECONFIG_FAR_DRIFT_CHANCE = 0.9;
-const RECONFIG_NEAR_DRIFT_CHANCE = 0.9;
+const MazeBackground = () => {
+  const canvasRef = useRef(null);
+  const particlesArrayRef = useRef([]);
+  const mousePositionRef = useRef({ x: undefined, y: undefined });
+  const animationFrameIdRef = useRef(null);
 
-class Particle {
+  const [focusMode, setFocusMode] = useState(false);
+
+  class Particle {
     constructor(x, y, context, canvasWidth, canvasHeight) {
-        this.x = x;
-        this.y = y;
-        this.canvasWidth = canvasWidth;
-        this.canvasHeight = canvasHeight;
-        this.size = Math.random() * 3 + 3.1; 
+      this.x = x;
+      this.y = y;
+      this.canvasWidth = canvasWidth;
+      this.canvasHeight = canvasHeight;
+      this.size = Math.random() * 3 + 3.1;
+      this.context = context;
 
-        this.context = context;
+      this.defaultColor = 'rgba(249, 20, 86, 0.25)';
+      this.lineColorDefault = 'rgba(249, 20, 86, 0.3)';
+      this.activeColor = 'rgba(179, 218, 235, 0.65)';
+      this.lineColorActive = 'rgba(143, 201, 162, 0.3)';
 
-        this.defaultColor = 'rgba(249, 20, 86, 0.25)'; //p
-        this.lineColorDefault = 'rgba(249, 20, 86, 0.3)'; // p
-        this.activeColor = 'rgba(179, 218, 235, 0.65)';   // b
-        this.lineColorActive = 'rgba(143, 201, 162, 0.3)'; // g
+      this.isActive = false;
+      this.activationTime = 0;
 
-        this.isActive = false;
-        this.activationTime = 0;
+      this.pulseFactor = 0.8 + Math.random() * 0.4;
+      this.pulseSpeed = Math.random() * 0.006 + 0.002;
+      this.pulseDirection = Math.random() < 0.5 ? 1 : -1;
 
-        this.pulseFactor = 0.8 + Math.random() * 0.4;
-        this.pulseSpeed = Math.random() * 0.006 + 0.002;
-        this.pulseDirection = Math.random() < 0.5 ? 1 : -1;
-
-        this.targetX = x + (Math.random() - 0.5) * RECONFIG_DRIFT_AMOUNT / 2;
-        this.targetY = y + (Math.random() - 0.5) * RECONFIG_DRIFT_AMOUNT / 2;
+      this.targetX = x + (Math.random() - 0.5) * 500;
+      this.targetY = y + (Math.random() - 0.5) * 500;
     }
 
     draw() {
-        if (this.pulseFactor > 1.1 || this.pulseFactor < 0.95) {
-            this.pulseDirection *= -1;
-        }
-        this.pulseFactor += this.pulseSpeed * this.pulseDirection;
-        const currentSize = this.size * this.pulseFactor;
+      if (this.pulseFactor > 1.1 || this.pulseFactor < 0.95) this.pulseDirection *= -1;
+      this.pulseFactor += this.pulseSpeed * this.pulseDirection * (focusMode ? 0.1 : 0.4);
 
-        this.context.beginPath();
-        this.context.arc(this.x, this.y, currentSize, 0, Math.PI * 2);
-        this.context.fillStyle = this.isActive ? this.activeColor : this.defaultColor;
-        this.context.fill();
+      const currentSize = this.size * this.pulseFactor;
+      this.context.beginPath();
+      this.context.arc(this.x, this.y, currentSize, 0, Math.PI * 2);
+      this.context.fillStyle = this.isActive ? this.activeColor : this.defaultColor;
+      this.context.globalAlpha = focusMode ? 0.2 : 0.7;
+      this.context.fill();
     }
 
     update(mousePos) {
-        if (this.isActive && (Date.now() - this.activationTime > PARTICLE_ACTIVE_LIFESPAN_MS)) {
-            this.isActive = false;
+      if (this.isActive && (Date.now() - this.activationTime > 8000)) {
+        this.isActive = false;
+      }
+
+      if (mousePos.x !== undefined && mousePos.y !== undefined) {
+        const dxMouse = mousePos.x - this.x;
+        const dyMouse = mousePos.y - this.y;
+        const distMouse = Math.sqrt(dxMouse * dxMouse + dyMouse * dyMouse);
+        if (distMouse < 60) {
+          this.isActive = true;
+          this.activationTime = Date.now();
         }
+      }
 
-        if (mousePos.x !== undefined && mousePos.y !== undefined) {
-            const dxMouse = mousePos.x - this.x;
-            const dyMouse = mousePos.y - this.y;
-            const distMouse = Math.sqrt(dxMouse * dxMouse + dyMouse * dyMouse);
-            if (distMouse < MOUSE_ACTIVATION_RADIUS) {
-                this.isActive = true;
-                this.activationTime = Date.now();
-            }
-        }
-        
-        const distToTargetX = this.targetX - this.x;
-        const distToTargetY = this.targetY - this.y;
-
-        this.x += distToTargetX * RECONFIG_SPEED;
-        this.y += distToTargetY * RECONFIG_SPEED;
-
-        if (Math.abs(distToTargetX) < 1 && Math.abs(distToTargetY) < 1) {
-            if (Math.random() < RECONFIG_FAR_DRIFT_CHANCE) {
-                 this.targetX = Math.random() * this.canvasWidth;
-                 this.targetY = Math.random() * this.canvasHeight;
-            } else if (Math.random() < RECONFIG_NEAR_DRIFT_CHANCE) {
-                this.targetX = this.x + (Math.random() - 0.5) * RECONFIG_DRIFT_AMOUNT;
-                this.targetY = this.y + (Math.random() - 0.5) * RECONFIG_DRIFT_AMOUNT;
-            }
-            this.targetX = Math.max(this.size * 2, Math.min(this.targetX, this.canvasWidth - this.size * 2));
-            this.targetY = Math.max(this.size * 2, Math.min(this.targetY, this.canvasHeight - this.size * 2));
-        }
-
-        if (this.x < this.size) this.x = this.size;
-        if (this.x > this.canvasWidth - this.size) this.x = this.canvasWidth - this.size;
-        if (this.y < this.size) this.y = this.size;
-        if (this.y > this.canvasHeight - this.size) this.y = this.canvasHeight - this.size;
+      const distToTargetX = this.targetX - this.x;
+      const distToTargetY = this.targetY - this.y;
+      this.x += distToTargetX * 0.0025 * (focusMode ? 0.25 : 1);
+      this.y += distToTargetY * 0.0025 * (focusMode ? 0.25 : 1);
     }
-}
+  }
 
-const MazeBackground = () => {
-    const canvasRef = useRef(null);
-    const particlesArrayRef = useRef([]);
-    const mousePositionRef = useRef({ x: undefined, y: undefined });
-    const animationFrameIdRef = useRef(null);
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    const context = canvas.getContext('2d');
+    const resize = () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      const numParticles = Math.floor((canvas.width * canvas.height) / 5000);
+      particlesArrayRef.current = Array.from({ length: numParticles }, () => {
+        const x = Math.random() * canvas.width;
+        const y = Math.random() * canvas.height;
+        return new Particle(x, y, context, canvas.width, canvas.height);
+      });
+    };
 
-    useEffect(() => {
-        console.log("MazeBackground: useEffect triggered"); // DEBUG LOG
-        const canvas = canvasRef.current;
-        if (!canvas) {
-            console.error("MazeBackground: Canvas element not found!"); 
-            return;
+    const handleMouseMove = e => {
+      mousePositionRef.current = { x: e.clientX, y: e.clientY };
+    };
+
+    const animate = () => {
+      context.clearRect(0, 0, canvas.width, canvas.height);
+      const particles = particlesArrayRef.current;
+      const connectDist = canvas.width > 768 ? 105 : 70;
+
+      particles.forEach(p => p.update(mousePositionRef.current));
+
+      for (let i = 0; i < particles.length; i++) {
+        for (let j = i + 1; j < particles.length; j++) {
+          const p1 = particles[i];
+          const p2 = particles[j];
+          const dx = p1.x - p2.x;
+          const dy = p1.y - p2.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+
+          if (dist < connectDist) {
+            const opacityBase = 1 - dist / connectDist;
+            context.beginPath();
+            context.moveTo(p1.x, p1.y);
+            context.lineTo(p2.x, p2.y);
+            context.strokeStyle = p2.isActive ? p1.lineColorActive : p1.lineColorDefault;
+            context.lineWidth = p1.isActive ? 3.5 : 1.5;
+            context.globalAlpha = p1.isActive ? opacityBase * 1 : opacityBase * 0.9; 
+            context.stroke();
+          }
         }
-        const context = canvas.getContext('2d');
-        if (!context) {
-            console.error("MazeBackground: Canvas context not found!"); 
-            return;
-        }
-        console.log("MazeBackground: Canvas and context obtained."); 
+      }
 
-        const setupCanvas = () => {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-            console.log(`MazeBackground: Canvas resized to ${canvas.width}x${canvas.height}`); 
-        };
+      context.globalAlpha = 1.0;
+      particles.forEach(p => p.draw());
+      animationFrameIdRef.current = requestAnimationFrame(animate);
+    };
 
-        const initParticles = () => {
-            particlesArrayRef.current = [];
-            const numberOfParticles = Math.floor((canvas.width * canvas.height) / PARTICLE_DENSITY_FACTOR);
-            console.log(`MazeBackground: Initializing ${numberOfParticles} particles.`); 
-            for (let i = 0; i < numberOfParticles; i++) {
-                const x = Math.random() * canvas.width;
-                const y = Math.random() * canvas.height;
-                particlesArrayRef.current.push(new Particle(x, y, context, canvas.width, canvas.height));
-            }
-        };
+    resize();
+    window.addEventListener('resize', resize);
+    window.addEventListener('mousemove', handleMouseMove);
+    animate();
 
-        const handleMouseMove = (event) => {
-            mousePositionRef.current = { x: event.clientX, y: event.clientY };
-        };
+    return () => {
+      cancelAnimationFrame(animationFrameIdRef.current);
+      window.removeEventListener('resize', resize);
+      window.removeEventListener('mousemove', handleMouseMove);
+    };
+  }, [focusMode]);
 
-        const handleResize = () => {
-            setupCanvas();
-            initParticles();
-        };
-
-        setupCanvas();
-        initParticles();
-
-        window.addEventListener('mousemove', handleMouseMove);
-        window.addEventListener('resize', handleResize);
-
-        let frameCount = 0; // DEBUG
-        const animate = () => {
-            if (frameCount < 5) { // Log only for the first few frames
-                 console.log("MazeBackground: animate() called, frame: " + frameCount);
-            }
-            frameCount++;
-
-            context.clearRect(0, 0, canvas.width, canvas.height);
-
-            const currentParticles = particlesArrayRef.current;
-            const connectDistance = canvas.width > 768 ? CONNECTION_DISTANCE_LG : CONNECTION_DISTANCE_SM;
-
-            currentParticles.forEach(p => p.update(mousePositionRef.current));
-            
-            for (let i = 0; i < currentParticles.length; i++) {
-                for (let j = i + 1; j < currentParticles.length; j++) {
-                    const p1 = currentParticles[i];
-                    const p2 = currentParticles[j];
-                    const dx = p1.x - p2.x;
-                    const dy = p1.y - p2.y;
-                    const distance = Math.sqrt(dx * dx + dy * dy);
-
-                    if (distance < connectDistance) {
-                        const isActiveConnection = p1.isActive || p2.isActive;
-                        context.beginPath();
-                        context.moveTo(p1.x, p1.y);
-                        context.lineTo(p2.x, p2.y);
-                        
-                        const opacityBase = 1 - (distance / connectDistance); 
-                        context.strokeStyle = isActiveConnection ? p1.lineColorActive : p1.lineColorDefault;
-                        context.lineWidth = isActiveConnection ? 3.5 : 1.5; 
-                        context.globalAlpha = isActiveConnection ? opacityBase * 1 : opacityBase * 0.9; 
-                        context.stroke();
-                    }
-                }
-            }
-            context.globalAlpha = 1.0;
-
-            currentParticles.forEach(p => p.draw());
-
-            animationFrameIdRef.current = requestAnimationFrame(animate);
-        };
-
-        animate();
-
-        return () => {
-            console.log("MazeBackground: Cleanup function called."); // DEBUG 
-            if (animationFrameIdRef.current) {
-                cancelAnimationFrame(animationFrameIdRef.current);
-            }
-            window.removeEventListener('mousemove', handleMouseMove);
-            window.removeEventListener('resize', handleResize);
-        };
-    }, []);
-
-    return <canvas ref={canvasRef} id="mazeBackgroundCanvas"/>;
+  return (
+    <>
+      <canvas ref={canvasRef} className="fixed inset-0 z-0" />
+      <button
+        onClick={() => setFocusMode(m => !m)}
+        className={`absolute top-6 right-6 z-10 transition-all duration-300 border-2 ${focusMode ? 'bg-red-500 bg-opacity-65 w-6 h-6 top-9 right-9 border-transparent' : 'bg-transparent w-12 h-12 border-seaGreen border-opacity-40'} border-8 rounded-full backdrop-opacity-90 shadow-md`}
+        title="Toggle Focus Mode"
+      />
+    </>
+  );
 };
-
 export default MazeBackground;

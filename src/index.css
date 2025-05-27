@@ -167,5 +167,8 @@ html, body {
   --green: #224c4a;
   --green: #326c62;
 
+}
 
+.dsaName {
+  @apply text-4xl text-darkBlue font-bold place-self-center font-ancizar
 }

@@ -28,16 +28,16 @@ export default {
         alegreya: ["Alegreya", "serif"]
       },
       fontSize: {
-        "xs": "0.85vw",
-        "sm": "1vw",
-        "base": "1.25vw",
+        "xs": "clamp(0.5rem, 0.5vw, 1rem)",
+        "sm": "clamp(1rem, 1.1vw, 2rem)",
+        "base": "clamp(1rem, 1.25vw, 1rem)",
         "lg": "1.1vw",
-        "xl": "1.5vw",
-        "2xl": "2vw",
+        "xl": "clamp(1rem, 1.3vw, 1.6rem)",
+        "2xl": "clamp(1.1rem, 1.85vw, 2rem)",
         "2.5xl": "3vw",
         "3xl": "4vw",
         "3.5xl": "5.5vw",
-        "4xl": "7vw",
+        "4xl": "clamp(3rem, 7vw, 5.5rem)",
         "5xl": "10vw",
         "6xl": "12vw",
         "7xl": "14vw",
@@ -69,7 +69,8 @@ export default {
         "blueZ": "rgba(179, 218, 235)",
         "greenZ": 'rgba(143, 201, 162)',
         "darkGreen": "#224c4a",
-        "seaGreen": "#326c62"
+        "seaGreen": "#326c62",
+        "lavZ": "#d3c5ee",
       },
     }
   },

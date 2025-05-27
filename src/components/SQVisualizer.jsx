@@ -2,9 +2,9 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
-/* -------------------------------------------------------------------------- */
-/*                                  StackVisualizer                           */
-/* -------------------------------------------------------------------------- */
+//ADD: Allow picking and moving elements around.
+
+/* StackVisualizer */
 export function StackVisualizer({ initial = [] }) {
   const [stack, setStack]       = useState(initial);
   const [hovered, setHovered]   = useState(null);
@@ -61,11 +61,9 @@ export function StackVisualizer({ initial = [] }) {
               placeholder="Value"
               value={inputValue}
               onChange={e => setInputValue(e.target.value)}
-              className="px-5 py-2 my-1 rounded-full focus:outline-none text-2xl"
+              className="px-5 p-2 my-1 rounded-full focus:outline-none text-xl"
             />
-            <div className="pointer-events-none absolute bottom-full left-1/2 transform -translate-x-1/2 mb-5
-                            w-max bg-darkBlue text-white text-base font-medium rounded-full py-1 px-3
-                            opacity-0 group-hover:opacity-90 transition-opacity">
+            <div className="pointer-events-none absolute bottom-full left-1/2 transform -translate-x-1/2 mb-5 w-max bg-darkBlue text-white text-base font-medium rounded-full py-1 px-3 opacity-0 group-hover:opacity-90 ransition-opacity">
               Enter values separated by commas or spaces.
             </div>
           </div>
@@ -74,30 +72,23 @@ export function StackVisualizer({ initial = [] }) {
           <div className="relative inline-block group">
             <button
               onClick={handlePush}
-              className="bg-seaGreen bg-opacity-50 text-backgroundLighter px-16 py-2 my-1 rounded-full
-                         hover:opacity-90 transition hover:translate-x-1 hover:translate-y-1 hover:scale-110 text-sm"
+              className="bg-seaGreen bg-opacity-50 text-backgroundLighter px-16 py-2 my-1 rounded-full hover:opacity-90 transition hover:translate-x-1 hover:translate-y-1 hover:scale-110 text-xl"
             >
               Push
             </button>
-            <div className="pointer-events-none absolute bottom-full left-1/2 transform -translate-x-1/2 mb-5
-                            w-max bg-darkBlue text-white text-base font-medium rounded-full py-1 px-3
-                            opacity-0 group-hover:opacity-90 transition-opacity">
+            <div className="pointer-events-none absolute bottom-full left-1/2 transform -translate-x-1/2 mb-5 w-max bg-darkBlue text-white text-base font-medium rounded-full py-1 px-3 opacity-0 group-hover:opacity-90 ransition-opacity">
+
               Insert the element(s) at the top of the stack.
             </div>
           </div>
-
-          {/* Pop */}
           <div className="relative inline-block group">
             <button
               onClick={handlePop}
-              className="bg-seaGreen bg-opacity-70 text-backgroundLighter px-16 py-2 my-1 rounded-full
-                         hover:opacity-90 transition hover:translate-x-1 hover:translate-y-1 hover:scale-110 text-sm"
-            >
+              className="bg-seaGreen bg-opacity-70 text-backgroundLighter px-16 py-2 my-1 rounded-full hover:opacity-90 transition hover:translate-x-1 hover:translate-y-1 hover:scale-110 text-xl">
               Pop
             </button>
-            <div className="pointer-events-none absolute bottom-full left-1/2 transform -translate-x-1/2 mb-5
-                            w-max bg-darkBlue text-white text-base font-medium rounded-full py-1 px-3
-                            opacity-0 group-hover:opacity-90 transition-opacity">
+            <div className="pointer-events-none absolute bottom-full left-1/2 transform -translate-x-1/2 mb-5 w-max bg-darkBlue text-white text-base font-medium rounded-full py-1 px-3 opacity-0 group-hover:opacity-90 ransition-opacity">
+
               Deletes the element at the top of the stack.
             </div>
           </div>
@@ -106,8 +97,7 @@ export function StackVisualizer({ initial = [] }) {
           <div className="relative inline-block group">
             <button
               onClick={handlePeek}
-              className="bg-seaGreen bg-opacity-90 text-backgroundLighter px-16 py-2 my-1 rounded-full
-                         hover:opacity-90 transition hover:translate-x-1 hover:translate-y-1 hover:scale-110 text-sm"
+              className="bg-seaGreen bg-opacity-85 text-backgroundLighter px-16 py-2 my-1 rounded-full hover:opacity-90 transition hover:translate-x-1 hover:translate-y-1 hover:scale-110 text-xl"
             >
               Peek
             </button>
@@ -143,17 +133,14 @@ export function StackVisualizer({ initial = [] }) {
                 whileHover={{y:-5,boxShadow:'0 4px 10px rgba(0,0,0,0.15)'}}
                 onHoverStart={()=>setHovered(i)}
                 onHoverEnd={()=>setHovered(null)}
-                className="relative flex-shrink-0 w-20 h-20 bg-backgroundLighter bg-opacity-60
-                           border border-seaGreen border-opacity-45 rounded-full shadow-sm
-                           flex items-center justify-center"
+                className="relative flex-shrink-0 w-20 h-20 bg-backgroundLighter bg-opacity-60 border border-seaGreen border-opacity-45 rounded-full shadow-sm flex items-center justify-center"
               >
                 <span className="font-ancizar text-xl p-3">{v}</span>
                 <motion.span
                   initial={{scale:0}}
                   animate={{scale: i===hovered?1.4:0}}
                   transition={{type:'spring',stiffness:300,damping:20}}
-                  className="absolute -top-2 -right-2 bg-pinkZ bg-opacity-60 text-white
-                             text-xs rounded-full w-6 h-6 flex items-center justify-center"
+                  className="absolute -top-2 -right-2 bg-pinkZ bg-opacity-60 text-white  text-xs rounded-full w-6 h-6 flex items-center justify-center"
                 >
                   {i}
                 </motion.span>
@@ -166,9 +153,8 @@ export function StackVisualizer({ initial = [] }) {
   );
 }
 
-/* -------------------------------------------------------------------------- */
-/*                                QueueVisualizer                            */
-/* -------------------------------------------------------------------------- */
+/* QueueVisualizer */
+
 export function QueueVisualizer({ initial = [] }) {
   const [queue, setQueue]       = useState(initial);
   const [hovered, setHovered]   = useState(null);
@@ -226,11 +212,9 @@ export function QueueVisualizer({ initial = [] }) {
               placeholder="Values"
               value={inputValue}
               onChange={e => setInputValue(e.target.value)}
-              className="px-5 py-2 my-1 rounded-full focus:outline-none text-lg"
+              className="px-5 p-2 my-1 rounded-full focus:outline-none text-xl"
             />
-            <div className="pointer-events-none absolute bottom-full left-1/2 transform -translate-x-1/2 mb-5
-                            w-max bg-darkBlue text-white text-base font-medium rounded-full py-1 px-3
-                            opacity-0 group-hover:opacity-90 transition-opacity">
+            <div className="pointer-events-none absolute bottom-full left-1/2 transform -translate-x-1/2 mb-5 w-max bg-darkBlue text-white text-base font-medium rounded-full py-1 px-3 opacity-0 group-hover:opacity-90 ransition-opacity">
               Enter values separated by commas or spaces.
             </div>
           </div>
@@ -239,14 +223,11 @@ export function QueueVisualizer({ initial = [] }) {
           <div className="relative inline-block group">
             <button
               onClick={handleEnqueue}
-              className="bg-seaGreen bg-opacity-50 text-backgroundLighter px-16 py-2 my-1 rounded-full
-                         hover:opacity-90 transition hover:translate-x-1 hover:translate-y-1 hover:scale-110 text-lg"
+              className="bg-seaGreen bg-opacity-50 text-backgroundLighter px-16 py-2 my-1 rounded-full hover:opacity-90 transition hover:translate-x-1 hover:translate-y-1 hover:scale-110 text-xl"
             >
               Enqueue
             </button>
-            <div className="pointer-events-none absolute bottom-full left-1/2 transform -translate-x-1/2 mb-5
-                            w-max bg-darkBlue text-white text-base font-medium rounded-full py-1 px-3
-                            opacity-0 group-hover:opacity-90 transition-opacity">
+            <div className="pointer-events-none absolute bottom-full left-1/2 transform -translate-x-1/2 mb-5 w-max bg-darkBlue text-white text-base font-medium rounded-full py-1 px-3 opacity-0 group-hover:opacity-90 ransition-opacity">
               Insert the element(s) to the back of the queue.
             </div>
           </div>
@@ -255,14 +236,12 @@ export function QueueVisualizer({ initial = [] }) {
           <div className="relative inline-block group">
             <button
               onClick={handleDequeue}
-              className="bg-seaGreen bg-opacity-70 text-backgroundLighter px-16 py-2 my-1 rounded-full
-                         hover:opacity-90 transition hover:translate-x-1 hover:translate-y-1 hover:scale-110 text-lg"
+              className="bg-seaGreen bg-opacity-70 text-backgroundLighter px-16 py-2 my-1 rounded-full hover:opacity-90 transition hover:translate-x-1 hover:translate-y-1 hover:scale-110 text-xl"
             >
               Dequeue
             </button>
-            <div className="pointer-events-none absolute bottom-full left-1/2 transform -translate-x-1/2 mb-5
-                            w-max bg-darkBlue text-white text-base font-medium rounded-full py-1 px-3
-                            opacity-0 group-hover:opacity-90 transition-opacity">
+            <div className="pointer-events-none absolute bottom-full left-1/2 transform -translate-x-1/2 mb-5 w-max bg-darkBlue text-white text-base font-medium rounded-full py-1 px-3 opacity-0 group-hover:opacity-90 ransition-opacity">
+
               Removes the element at the front of the queue.
             </div>
           </div>
@@ -271,14 +250,11 @@ export function QueueVisualizer({ initial = [] }) {
           <div className="relative inline-block group">
             <button
               onClick={handlePeek}
-              className="bg-seaGreen bg-opacity-90 text-backgroundLighter px-16 py-2 my-1 rounded-full
-                         hover:opacity-90 transition hover:translate-x-1 hover:translate-y-1 hover:scale-110 text-lg"
+              className="bg-seaGreen bg-opacity-85 text-backgroundLighter px-16 py-2 my-1 rounded-full hover:opacity-90 transition hover:translate-x-1 hover:translate-y-1 hover:scale-110 text-xl"
             >
               Peek
             </button>
-            <div className="pointer-events-none absolute bottom-full left-1/2 transform -translate-x-1/2 mb-5
-                            w-max bg-darkBlue text-white text-base font-medium rounded-full py-1 px-3
-                            opacity-0 group-hover:opacity-90 transition-opacity">
+            <div className="pointer-events-none absolute bottom-full left-1/2 transform -translate-x-1/2 mb-5 w-max bg-darkBlue text-white text-base font-medium rounded-full py-1 px-3 opacity-0 group-hover:opacity-90 ransition-opacity">
               References the element at the front (without removing).
             </div>
           </div>
@@ -312,9 +288,7 @@ export function QueueVisualizer({ initial = [] }) {
                 whileHover={{ y: -5, boxShadow: '0 4px 10px rgba(0,0,0,0.15)' }}
                 onHoverStart={() => setHovered(i)}
                 onHoverEnd={() => setHovered(null)}
-                className="relative flex-shrink-0 w-20 h-20 bg-backgroundLighter bg-opacity-60
-                           border border-seaGreen border-opacity-45 rounded-full shadow-sm
-                           flex items-center justify-center"
+                className="relative flex-shrink-0 w-20 h-20 bg-backgroundLighter bg-opacity-60 border border-seaGreen border-opacity-45 rounded-full shadow-sm flex items-center justify-center"
                 style={{ scrollSnapAlign: 'center' }}
               >
                 <span className="font-ancizar text-xl">{v}</span>
@@ -322,8 +296,7 @@ export function QueueVisualizer({ initial = [] }) {
                   initial={{ scale: 0 }}
                   animate={{ scale: i === hovered ? 1.4 : 0 }}
                   transition={{ type: 'spring', stiffness: 300, damping: 20 }}
-                  className="absolute -top-2 -right-2 bg-pinkZ bg-opacity-60 text-white
-                             text-xs rounded-full w-6 h-6 flex items-center justify-center"
+                  className="absolute -top-2 -right-2 bg-pinkZ bg-opacity-60 text-white  text-xs rounded-full w-6 h-6 flex items-center justify-center"
                 >
                   {i}
                 </motion.span>
