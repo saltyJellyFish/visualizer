@@ -1,4 +1,4 @@
-// Enhanced MazeBackground with Focus Mode Toggle Button
+// Enhanced MazeBackground with Focus Mode Toggle Button (Fixed Triangle Button Behavior)
 import React, { useRef, useEffect, useState } from 'react';
 
 const MazeBackground = () => {
@@ -8,6 +8,8 @@ const MazeBackground = () => {
   const animationFrameIdRef = useRef(null);
 
   const [focusMode, setFocusMode] = useState(false);
+  const [scrollAngle, setScrollAngle] = useState(0);
+  const targetAngleRef = useRef(0);
 
   class Particle {
     constructor(x, y, context, canvasWidth, canvasHeight) {
@@ -86,7 +88,16 @@ const MazeBackground = () => {
       mousePositionRef.current = { x: e.clientX, y: e.clientY };
     };
 
+    const handleScroll = () => {
+      const scrollTop = window.scrollY || document.documentElement.scrollTop;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const scrollFraction = Math.min(scrollTop / docHeight, 1);
+      targetAngleRef.current = scrollFraction * 360;
+    };
+
     const animate = () => {
+      setScrollAngle(prev => prev + (targetAngleRef.current - prev) * 0.03);
+
       context.clearRect(0, 0, canvas.width, canvas.height);
       const particles = particlesArrayRef.current;
       const connectDist = canvas.width > 768 ? 105 : 70;
@@ -108,7 +119,7 @@ const MazeBackground = () => {
             context.lineTo(p2.x, p2.y);
             context.strokeStyle = p2.isActive ? p1.lineColorActive : p1.lineColorDefault;
             context.lineWidth = p1.isActive ? 3.5 : 1.5;
-            context.globalAlpha = p1.isActive ? opacityBase * 1 : opacityBase * 0.9; 
+            context.globalAlpha = p1.isActive ? opacityBase * 1 : opacityBase * 0.9;
             context.stroke();
           }
         }
@@ -122,24 +133,44 @@ const MazeBackground = () => {
     resize();
     window.addEventListener('resize', resize);
     window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('scroll', handleScroll);
     animate();
 
     return () => {
       cancelAnimationFrame(animationFrameIdRef.current);
       window.removeEventListener('resize', resize);
       window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('scroll', handleScroll);
     };
   }, [focusMode]);
 
   return (
     <>
-      <canvas ref={canvasRef} className="fixed inset-0 z-0" />
-      <button
+      <canvas ref={canvasRef} className="fixed top-6 inset-0 z-0" />
+      <div
         onClick={() => setFocusMode(m => !m)}
-        className={`absolute top-6 right-6 z-10 transition-all duration-300 border-2 ${focusMode ? 'bg-red-500 bg-opacity-65 w-6 h-6 top-9 right-9 border-transparent' : 'bg-transparent w-12 h-12 border-seaGreen border-opacity-40'} border-8 rounded-full backdrop-opacity-90 shadow-md`}
-        title="Toggle Focus Mode"
-      />
+        className={`fixed top-8 right-6 z-10 transition-all duration-300 ease-in-out cursor-pointer backdrop:bg-transparent ${focusMode ? 'w-10 h-16' : 'w-12 h-14'}`}
+        style={{
+          transform: `rotate(${scrollAngle}deg)`,
+          transition: 'transform 0.4s ease-out rotate(30deg)',
+        }
+        } 
+        title='Toggle Focus Mode'>
+        <svg
+          viewBox="0 0 100 100"
+          className="w-full h-full"
+          style={{ transform: 'rotate(90deg)' }}
+        >
+          <polygon
+            points="50,21 10,90 90,90"
+            fill={focusMode ? '#ff6f87' : 'transparent'}
+            stroke={focusMode ? 'none' : '#6e6e67'}
+            strokeWidth={focusMode ? 0 : 12}
+          />
+        </svg>
+      </div>
     </>
   );
 };
+
 export default MazeBackground;

@@ -56,12 +56,14 @@ html, body {
   font-size: clamp(1.2rem, 3vw, 2.2rem);
   /*background: #2e495c;*/
   /*background: rgb(63, 143, 185);*/
-  background: -webkit-linear-gradient(50deg, #2e495c, #2e495c, #2e495c,#2e495c,  #2e495c, #2e495c, #e0586e,#2e495c, #2e495c, #2e495c,#e0586e , #2e495c, #2e495c, #2e495c, #2e495c);
+  /*background: -webkit-linear-gradient(50deg, #3b3b35, #3b3b35, #3b3b35,#3b3b35,  #3b3b35, #3b3b35, #e0586e,#3b3b35, #3b3b35, #3b3b35,#e0586e , #3b3b35,  #3b3b35, #3b3b35, #3b3b35, #3b3b35, #3b3b35, #3b3b35);*/
+  background: -webkit-linear-gradient(50deg, #565652 25%,#ae5765 35%, #565652 43%, #565652 60%, #ae5765 76%, #565652 82%);
+
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
   color: transparent;
-  font-weight: 650;
+  font-weight: 700;
   margin-top: 25px;
   text-shadow: 0 2px 25px  #d6f9e17c;
 }
@@ -137,7 +139,7 @@ html, body {
   font-family: 'Ancizar Sans', sans-serif;
   font-weight: 650;
   padding: 0 1rem;
-  color: #2e495c;
+  color: var(--tan);
   /*line-height: 1.4; */
 }
 
@@ -157,6 +159,7 @@ html, body {
     /*flex-grow: 1;*/
   --darkBlueZ:   #2e495c;
   --pinkZ:    #e0586f;
+  --lighterPinkZ:    #ff6f87;
   --background: #e8e4d1b1;
   --backgroundLighter: #f8f6ee;
     --backgroundLighter: #bab6aa;
@@ -165,10 +168,10 @@ html, body {
   --greenZ: rgba(143, 201, 162);
   --lavZ: #d3c5ee;
   --green: #224c4a;
-  --green: #326c62;
+  --tan: #565652;
 
 }
-
 .dsaName {
   @apply text-4xl text-darkBlue font-bold place-self-center font-ancizar
 }
+

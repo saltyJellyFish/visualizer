@@ -71,6 +71,7 @@ export default {
         "darkGreen": "#224c4a",
         "seaGreen": "#326c62",
         "lavZ": "#d3c5ee",
+        "tan": "#89897d",
       },
     }
   },
