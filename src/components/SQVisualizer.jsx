@@ -3,6 +3,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 //ADD: Allow picking and moving elements around.
+//ADD: Make it save state in localStorage so it persists across stack/queue changes. OR could add both stack and queue in the same page as two different visualizers.
 
 /* StackVisualizer */
 export function StackVisualizer({ initial = [] }) {
