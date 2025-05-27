@@ -1,4 +1,4 @@
-// src/components/DataStructureVisualizers.jsx
+// src/components/SQVisualizer.jsx
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -61,7 +61,7 @@ export function StackVisualizer({ initial = [] }) {
               placeholder="Value"
               value={inputValue}
               onChange={e => setInputValue(e.target.value)}
-              className="px-5 py-2 my-1 rounded-full focus:outline-none text-lg"
+              className="px-5 py-2 my-1 rounded-full focus:outline-none text-2xl"
             />
             <div className="pointer-events-none absolute bottom-full left-1/2 transform -translate-x-1/2 mb-5
                             w-max bg-darkBlue text-white text-base font-medium rounded-full py-1 px-3
@@ -75,7 +75,7 @@ export function StackVisualizer({ initial = [] }) {
             <button
               onClick={handlePush}
               className="bg-seaGreen bg-opacity-50 text-backgroundLighter px-16 py-2 my-1 rounded-full
-                         hover:opacity-90 transition hover:translate-x-1 hover:translate-y-1 hover:scale-110 text-lg"
+                         hover:opacity-90 transition hover:translate-x-1 hover:translate-y-1 hover:scale-110 text-sm"
             >
               Push
             </button>
@@ -91,7 +91,7 @@ export function StackVisualizer({ initial = [] }) {
             <button
               onClick={handlePop}
               className="bg-seaGreen bg-opacity-70 text-backgroundLighter px-16 py-2 my-1 rounded-full
-                         hover:opacity-90 transition hover:translate-x-1 hover:translate-y-1 hover:scale-110 text-lg"
+                         hover:opacity-90 transition hover:translate-x-1 hover:translate-y-1 hover:scale-110 text-sm"
             >
               Pop
             </button>
@@ -107,7 +107,7 @@ export function StackVisualizer({ initial = [] }) {
             <button
               onClick={handlePeek}
               className="bg-seaGreen bg-opacity-90 text-backgroundLighter px-16 py-2 my-1 rounded-full
-                         hover:opacity-90 transition hover:translate-x-1 hover:translate-y-1 hover:scale-110 text-lg"
+                         hover:opacity-90 transition hover:translate-x-1 hover:translate-y-1 hover:scale-110 text-sm"
             >
               Peek
             </button>
@@ -145,9 +145,9 @@ export function StackVisualizer({ initial = [] }) {
                 onHoverEnd={()=>setHovered(null)}
                 className="relative flex-shrink-0 w-20 h-20 bg-backgroundLighter bg-opacity-60
                            border border-seaGreen border-opacity-45 rounded-full shadow-sm
-                           flex items-center justify-center text-xl"
+                           flex items-center justify-center"
               >
-                <span className="font-ancizar text-2xl p-3">{v}</span>
+                <span className="font-ancizar text-xl p-3">{v}</span>
                 <motion.span
                   initial={{scale:0}}
                   animate={{scale: i===hovered?1.4:0}}
@@ -314,7 +314,7 @@ export function QueueVisualizer({ initial = [] }) {
                 onHoverEnd={() => setHovered(null)}
                 className="relative flex-shrink-0 w-20 h-20 bg-backgroundLighter bg-opacity-60
                            border border-seaGreen border-opacity-45 rounded-full shadow-sm
-                           flex items-center justify-center text-xl"
+                           flex items-center justify-center"
                 style={{ scrollSnapAlign: 'center' }}
               >
                 <span className="font-ancizar text-xl">{v}</span>
