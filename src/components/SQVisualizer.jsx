@@ -52,8 +52,8 @@ export function StackVisualizer({ initial = [] }) {
   return (
     <div className="flex flex-col items-center space-y-6 mb-20">
       {/* Toolbar */}
-      <div className="bg-backgroundLighterZ bg-opacity-30 py-24 rounded-3xl place-content-evenly w-11/12 shadow-md shadow-stone-300 my-12 justify-items-center">
-        <div className="flex flex-wrap bg-gray-700 bg-opacity-30 p-4 rounded-full shadow place-content-evenly w-10/12">
+      <div className="tanBox">
+        <div className="nbar">
           {/* Input */}
           <div className="relative inline-block group">
             <input
@@ -61,9 +61,9 @@ export function StackVisualizer({ initial = [] }) {
               placeholder="Value"
               value={inputValue}
               onChange={e => setInputValue(e.target.value)}
-              className="px-5 p-2 my-1 rounded-full focus:outline-none text-xl"
+              className="searchBoxPlaceholder"
             />
-            <div className="pointer-events-none absolute bottom-full left-1/2 transform -translate-x-1/2 mb-5 w-max bg-darkBlue text-white text-base font-medium rounded-full py-1 px-3 opacity-0 group-hover:opacity-90 ransition-opacity">
+            <div className="bottonHover">
               Enter values separated by commas or spaces.
             </div>
           </div>
@@ -72,11 +72,11 @@ export function StackVisualizer({ initial = [] }) {
           <div className="relative inline-block group">
             <button
               onClick={handlePush}
-              className="bg-seaGreen bg-opacity-50 text-backgroundLighter px-16 py-2 my-1 rounded-full hover:opacity-90 transition hover:translate-x-1 hover:translate-y-1 hover:scale-110 text-xl"
+              className= "bg-opacity-50 buttons"
             >
               Push
             </button>
-            <div className="pointer-events-none absolute bottom-full left-1/2 transform -translate-x-1/2 mb-5 w-max bg-darkBlue text-white text-base font-medium rounded-full py-1 px-3 opacity-0 group-hover:opacity-90 ransition-opacity">
+            <div className="bottonHover">
 
               Insert the element(s) at the top of the stack.
             </div>
@@ -84,10 +84,10 @@ export function StackVisualizer({ initial = [] }) {
           <div className="relative inline-block group">
             <button
               onClick={handlePop}
-              className="bg-seaGreen bg-opacity-70 text-backgroundLighter px-16 py-2 my-1 rounded-full hover:opacity-90 transition hover:translate-x-1 hover:translate-y-1 hover:scale-110 text-xl">
+              className="bg-opacity-70 buttons">
               Pop
             </button>
-            <div className="pointer-events-none absolute bottom-full left-1/2 transform -translate-x-1/2 mb-5 w-max bg-darkBlue text-white text-base font-medium rounded-full py-1 px-3 opacity-0 group-hover:opacity-90 ransition-opacity">
+            <div className="bottonHover">
 
               Deletes the element at the top of the stack.
             </div>
@@ -97,13 +97,11 @@ export function StackVisualizer({ initial = [] }) {
           <div className="relative inline-block group">
             <button
               onClick={handlePeek}
-              className="bg-seaGreen bg-opacity-85 text-backgroundLighter px-16 py-2 my-1 rounded-full hover:opacity-90 transition hover:translate-x-1 hover:translate-y-1 hover:scale-110 text-xl"
+              className=" bg-opacity-85 buttons"
             >
               Peek
             </button>
-            <div className="pointer-events-none absolute bottom-full left-1/2 transform -translate-x-1/2 mb-5
-                            w-max bg-darkBlue text-white text-base font-medium rounded-full py-1 px-3
-                            opacity-0 group-hover:opacity-90 transition-opacity">
+            <div className="bottonHover">
               References the element at the top (without popping).
             </div>
           </div>
@@ -115,7 +113,7 @@ export function StackVisualizer({ initial = [] }) {
             Top of Stack: <strong>{peekValue}</strong>
           </div>
         ) : error ? (
-          <div className="text-lg text-center text-pinkZ border-pinkZ border-2 rounded-full px-5 py-2">
+          <div className="errorText">
             {error}
           </div>
         ) : null}
@@ -133,14 +131,14 @@ export function StackVisualizer({ initial = [] }) {
                 whileHover={{y:-5,boxShadow:'0 4px 10px rgba(0,0,0,0.15)'}}
                 onHoverStart={()=>setHovered(i)}
                 onHoverEnd={()=>setHovered(null)}
-                className="relative flex-shrink-0 w-20 h-20 bg-backgroundLighter bg-opacity-60 border border-seaGreen border-opacity-45 rounded-full shadow-sm flex items-center justify-center"
+                className="node"
               >
                 <span className="font-ancizar text-xl p-3">{v}</span>
                 <motion.span
                   initial={{scale:0}}
                   animate={{scale: i===hovered?1.4:0}}
                   transition={{type:'spring',stiffness:300,damping:20}}
-                  className="absolute -top-2 -right-2 bg-pinkZ bg-opacity-60 text-white  text-xs rounded-full w-6 h-6 flex items-center justify-center"
+                  className="nodeHover"
                 >
                   {i}
                 </motion.span>
@@ -198,12 +196,11 @@ export function QueueVisualizer({ initial = [] }) {
     }
     setPeekValue(queue[0]);
   };
-
   return (
     <div className="flex flex-col items-center space-y-6 mb-20">
       {/* Toolbar */}
-      <div className="bg-backgroundLighterZ bg-opacity-20 py-24 rounded-3xl place-content-evenly w-11/12 shadow-md shadow-stone-300 my-12 justify-items-center">
-        <div className="flex flex-wrap bg-gray-700 bg-opacity-30 p-4 rounded-full shadow place-content-evenly w-10/12">
+      <div className="tanBox">
+        <div className="nbar">
           
           {/* Input */}
           <div className="relative inline-block group">
@@ -212,9 +209,9 @@ export function QueueVisualizer({ initial = [] }) {
               placeholder="Values"
               value={inputValue}
               onChange={e => setInputValue(e.target.value)}
-              className="px-5 p-2 my-1 rounded-full focus:outline-none text-xl"
+              className="searchBoxPlaceholder"
             />
-            <div className="pointer-events-none absolute bottom-full left-1/2 transform -translate-x-1/2 mb-5 w-max bg-darkBlue text-white text-base font-medium rounded-full py-1 px-3 opacity-0 group-hover:opacity-90 ransition-opacity">
+            <div className="bottonHover">
               Enter values separated by commas or spaces.
             </div>
           </div>
@@ -223,11 +220,11 @@ export function QueueVisualizer({ initial = [] }) {
           <div className="relative inline-block group">
             <button
               onClick={handleEnqueue}
-              className="bg-seaGreen bg-opacity-50 text-backgroundLighter px-16 py-2 my-1 rounded-full hover:opacity-90 transition hover:translate-x-1 hover:translate-y-1 hover:scale-110 text-xl"
+              className=" bg-opacity-50 buttons"
             >
               Enqueue
             </button>
-            <div className="pointer-events-none absolute bottom-full left-1/2 transform -translate-x-1/2 mb-5 w-max bg-darkBlue text-white text-base font-medium rounded-full py-1 px-3 opacity-0 group-hover:opacity-90 ransition-opacity">
+            <div className="bottonHover">
               Insert the element(s) to the back of the queue.
             </div>
           </div>
@@ -236,11 +233,11 @@ export function QueueVisualizer({ initial = [] }) {
           <div className="relative inline-block group">
             <button
               onClick={handleDequeue}
-              className="bg-seaGreen bg-opacity-70 text-backgroundLighter px-16 py-2 my-1 rounded-full hover:opacity-90 transition hover:translate-x-1 hover:translate-y-1 hover:scale-110 text-xl"
+              className=" bg-opacity-70 buttons"
             >
               Dequeue
             </button>
-            <div className="pointer-events-none absolute bottom-full left-1/2 transform -translate-x-1/2 mb-5 w-max bg-darkBlue text-white text-base font-medium rounded-full py-1 px-3 opacity-0 group-hover:opacity-90 ransition-opacity">
+            <div className="bottonHover">
 
               Removes the element at the front of the queue.
             </div>
@@ -250,11 +247,11 @@ export function QueueVisualizer({ initial = [] }) {
           <div className="relative inline-block group">
             <button
               onClick={handlePeek}
-              className="bg-seaGreen bg-opacity-85 text-backgroundLighter px-16 py-2 my-1 rounded-full hover:opacity-90 transition hover:translate-x-1 hover:translate-y-1 hover:scale-110 text-xl"
+              className=" bg-opacity-85 buttons"
             >
               Peek
             </button>
-            <div className="pointer-events-none absolute bottom-full left-1/2 transform -translate-x-1/2 mb-5 w-max bg-darkBlue text-white text-base font-medium rounded-full py-1 px-3 opacity-0 group-hover:opacity-90 ransition-opacity">
+            <div className="bottonHover">
               References the element at the front (without removing).
             </div>
           </div>
@@ -266,7 +263,7 @@ export function QueueVisualizer({ initial = [] }) {
             Front of Queue: <strong>{peekValue}</strong>
           </div>
         ) : error ? (
-          <div className="text-lg text-center text-pinkZ border-pinkZ border-2 rounded-full px-5 py-2">
+          <div className="errorText">
             {error}
           </div>
         ) : null}
@@ -288,7 +285,7 @@ export function QueueVisualizer({ initial = [] }) {
                 whileHover={{ y: -5, boxShadow: '0 4px 10px rgba(0,0,0,0.15)' }}
                 onHoverStart={() => setHovered(i)}
                 onHoverEnd={() => setHovered(null)}
-                className="relative flex-shrink-0 w-20 h-20 bg-backgroundLighter bg-opacity-60 border border-seaGreen border-opacity-45 rounded-full shadow-sm flex items-center justify-center"
+                className="node"
                 style={{ scrollSnapAlign: 'center' }}
               >
                 <span className="font-ancizar text-xl">{v}</span>
@@ -296,7 +293,7 @@ export function QueueVisualizer({ initial = [] }) {
                   initial={{ scale: 0 }}
                   animate={{ scale: i === hovered ? 1.4 : 0 }}
                   transition={{ type: 'spring', stiffness: 300, damping: 20 }}
-                  className="absolute -top-2 -right-2 bg-pinkZ bg-opacity-60 text-white  text-xs rounded-full w-6 h-6 flex items-center justify-center"
+                  className="nodeHover"
                 >
                   {i}
                 </motion.span>

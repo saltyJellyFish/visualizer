@@ -171,7 +171,36 @@ html, body {
   --tan: #565652;
 
 }
-.dsaName {
-  @apply text-4xl text-darkBlue font-bold place-self-center font-ancizar
+.homeLink {
+  @apply text-sm text-darkBlue font-semibold hover:underline inline-block
 }
-
+.dsaName {
+  @apply text-4xl text-darkBlue font-bold place-self-center font-ancizar 
+}
+.dsaDesc {
+  @apply text-2xl text-darkBlue font-bold place-self-center font-ancizar mt-6
+}
+.buttons {
+  @apply bg-tan text-backgroundLighter px-16 py-2 my-1 rounded-full hover:opacity-90 transition hover:translate-x-1 hover:translate-y-1 hover:scale-110 text-xl
+}
+.bottonHover {
+    @apply pointer-events-none absolute bottom-full left-1/2 transform -translate-x-1/2 mb-5 w-max bg-darkBlue text-white text-base font-medium rounded-full py-1 px-3 opacity-0 group-hover:opacity-90 transition-opacity
+}
+.nodeHover {
+  @apply absolute -top-2 -right-2 bg-pinkZ bg-opacity-60 text-white  text-xs rounded-full w-6 h-6 flex items-center justify-center
+}
+.node {
+  @apply relative flex-shrink-0 w-20 h-20 bg-backgroundLighter bg-opacity-60 border border-tan border-opacity-45 rounded-full shadow-sm flex items-center justify-center
+}
+.tanBox {
+  @apply bg-tan bg-opacity-30 py-20 rounded-3xl place-content-evenly w-11/12 shadow-md shadow-stone-300 my-12 justify-items-center
+}
+.nbar {
+  @apply flex flex-wrap bg-gray-700 bg-opacity-25 p-4 rounded-full shadow place-content-evenly w-10/12
+}
+.errorText {
+  @apply text-lg text-center text-pinkZ border-pinkZ border-2 rounded-full px-5 py-2
+}
+.searchBoxPlaceholder {
+  @apply px-5 p-2 my-1 rounded-full focus:outline-none text-xl 
+}

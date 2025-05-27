@@ -9,11 +9,11 @@ export default function StacksQueues() {
 
   return (
     <div className="mainContentWrapper p-10 font-ancizar">
-      <Link to="/" className="text-m text-darkBlue font-semibold hover:underline inline-block">← Back to Home
+      <Link to="/" className="homeLink">← Back to Home
       </Link>
       <div className="my-20 flex flex-col items-center">
-        <h1 className="dsaName">Stacks & Queues</h1>
-        <p className="text-2xl text-darkBlue font-bold place-self-center mt-6"> Choose whether you want to visualize a Stack (LIFO) or a Queue (FIFO).
+        <h1 className="dsaName">Stacks & Queues Visualizer</h1>
+        <p className="dsaDesc"> Choose whether you want to visualize a Stack (LIFO) or a Queue (FIFO).
         </p>
         </div>
         {/* Mode toggle */}
