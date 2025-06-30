@@ -1,17 +1,16 @@
 // src/components/LinkedListVisualizer.jsx
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-
-const LinkedListTypes = ['Singly', 'Doubly', 'Circular'];
-
-export default function LinkedListVisualizer({ initial = [] }) {
+export default function LinkedListVisualizer({ initial = [], selectedType = 'Singly' }) {
   const [list, setList] = useState(initial);
-  const [type, setType] = useState('Singly');
   const [hovered, setHovered] = useState(null);
   const [inputValue, setInputValue] = useState('');
   const [insertIndex, setInsertIndex] = useState('');
   const [error, setError] = useState('');
   const containerRef = useRef();
+  useEffect(() => {
+    setList(initial);
+  }, [selectedType]);
 
   const handleInsert = () => {
     setError('');
@@ -47,7 +46,7 @@ export default function LinkedListVisualizer({ initial = [] }) {
       <div className="tanBox">
         <div className="nbar flex-wrap gap-4">
           {/* Type Selection Buttons */}
-          {LinkedListTypes.map(llType => (
+          {/*          {LinkedListTypes.map(llType => (
             <button
               key={llType}
               onClick={() => setType(llType)}
@@ -58,6 +57,7 @@ export default function LinkedListVisualizer({ initial = [] }) {
               {llType}
             </button>
           ))}
+        */}
 
           {/* Input */}
           <div className="relative inline-block group">
@@ -73,7 +73,7 @@ export default function LinkedListVisualizer({ initial = [] }) {
             </div>
           </div>
 
-          {/* Insert Index */}
+          {/*
           <div className="relative inline-block group">
             <input
               type="number"
@@ -86,13 +86,14 @@ export default function LinkedListVisualizer({ initial = [] }) {
               Optional index to insert value(s).
             </div>
           </div>
+                    */}
 
           {/* Buttons */}
           <div className="relative inline-block group">
             <button onClick={handleInsert} className="bg-opacity-50 buttons">
               Insert
             </button>
-            <div className="bottonHover">Insert value(s) at end or specific index.</div>
+            <div className="bottonHover">Insert value(s) at the end of the list.</div>
           </div>
 
           <div className="relative inline-block group">
@@ -140,13 +141,13 @@ export default function LinkedListVisualizer({ initial = [] }) {
                 >
                   {i}
                 </motion.span>
-                {type === 'Singly' && i < list.length - 1 && (
+                {selectedType === 'Singly' && i < list.length - 1 && (
                   <span className="absolute -right-6 text-2xl font-bold text-darkBlue">→</span>
                 )}
-                {type === 'Doubly' && (
+                {selectedType === 'Doubly' && (
                   <span className="absolute -right-6 text-2xl font-bold text-darkBlue">⇄</span>
                 )}
-                {type === 'Circular' && (
+                {selectedType === 'Circular' && (
                   <span className="absolute -right-6 text-2xl font-bold text-darkBlue">↻</span>
                 )}
               </motion.div>
