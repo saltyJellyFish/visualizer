@@ -57,7 +57,7 @@ html, body {
   /*background: #2e495c;*/
   /*background: rgb(63, 143, 185);*/
   /*background: -webkit-linear-gradient(50deg, #3b3b35, #3b3b35, #3b3b35,#3b3b35,  #3b3b35, #3b3b35, #e0586e,#3b3b35, #3b3b35, #3b3b35,#e0586e , #3b3b35,  #3b3b35, #3b3b35, #3b3b35, #3b3b35, #3b3b35, #3b3b35);*/
-  background: -webkit-linear-gradient(50deg, #565652 25%,#ae5765 35%, #565652 43%, #565652 60%, #ae5765 76%, #565652 82%);
+  background: -webkit-linear-gradient(50deg, #565652 25%,#ae5765 35%, #565652 43%, #565652 60%);
 
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
