@@ -2,15 +2,16 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { StackVisualizer, QueueVisualizer }
-  from '../components/SQVisualizer.jsx';
+from '../components/SQVisualizer.jsx';
+  import * as Layout from '../components/layout';
+
 
 export default function StacksQueues() {
   const [mode, setMode] = useState('stack');
 
   return (
     <div className="mainContentWrapper p-10 font-ancizar">
-      <Link to="/" className="homeLink">← Back to Home
-      </Link>
+            <Layout.BackToHomeButton />
       <div className="my-20 flex flex-col items-center">
         <h1 className="dsaName">Stacks & Queues Visualizer</h1>
         <p className="dsaDesc"> Choose whether you want to visualize a Stack (LIFO) or a Queue (FIFO).
@@ -44,3 +45,6 @@ export default function StacksQueues() {
     </div>
   );
 }
+
+
+
