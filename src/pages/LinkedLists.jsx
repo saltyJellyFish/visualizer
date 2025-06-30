@@ -1,23 +1,39 @@
-// src/pages/LinkedLists.jsx
-import React from 'react';
+// src/pages/LinkedListsPage.jsx
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import LinkedListVisualizer from '../components/LLVisualizer';
+import * as Layout from '../components/layout';
 
-export default function LinkedListPage() {
+export default function LinkedListsPage() {
+  const [mode, setMode] = useState('Singly');
   return (
     <div className="mainContentWrapper p-10 font-ancizar">
-      <Link to="/" className="homeLink">
-        ← Back to Home
-      </Link>
-      <div className="my-20 flex flex-col items-center">
+      <Layout.BackToHomeButton />
+          <div className="my-20 flex flex-col items-center">
         <h1 className="dsaName">Linked List Visualizer</h1>
-        <p className="dsaDesc">
-          Visualize how elements are inserted, removed, and managed in a linked list structure.
+        <p className="dsaDesc text-center max-w-4xl">
+          Choose between Singly, Doubly, or Circular Linked Lists and interactively modify their structure.
         </p>
       </div>
+      {/* Mode Toggle */}
+      <div className="flex space-x-8 justify-center">
+        {['Singly', 'Doubly', 'Circular'].map(type => (
+          <button
+            key={type}
+            onClick={() => setMode(type)}
+            className={`px-12 py-3 rounded-full text-xl font-semibold transition
+              ${mode === type
+                ? 'bg-seaGreen bg-opacity-80 text-backgroundLighter'
+                : 'bg-gray-200 text-gray-700 hover:bg-gray-300'}`}
+          >
+            {type}
+          </button>
+        ))}
+      </div>
 
+      {/* Visualizer */}
       <div className="cardDesc p-2">
-        <LinkedListVisualizer initial={[1, 2, 3, 4]} />
+        <LinkedListVisualizer initial={["A", "B", "C"]} selectedType={mode} />
       </div>
 
       <footer className="footer">
