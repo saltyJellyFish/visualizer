@@ -81,54 +81,61 @@ export default function ArrayVisualizer({ initial = [3, 1, 4, 1, 5, 9] }) {
   return (
     <div className="flex flex-col items-center space-y-6 mb-20">
       <div className="tanBox">
-        <div className="nbar">
-
-          <div className="relative inline-block group">
-            <input
-              type="text"
-              placeholder="Value"
-              value={inputValue}
-              onChange={e => setInputValue(e.target.value)}
-              className="searchBoxPlaceholder"
-            />
-            <div className="bottonHover">
-              Enter values separated by commas or spaces.
-            </div>
-          </div>
-
-          <div className="relative inline-block group">
-            <input
-              type="number"
-              placeholder="Index"
-              value={inputIndex}
-              onChange={e => setInputIndex(e.target.value)}
-              className="searchBoxPlaceholder"
-            />
-            <div className="bottonHover">
-              Enter values separated by commas or spaces.
-            </div>
-          </div>
-
-          {[{ label: 'Insert', action: handleInsertAt, color: 'bg-seaGreen bg-opacity-50' },
-            { label: 'Delete', action: handleDeleteAt, color: 'bg-seaGreen bg-opacity-60' },
-            { label: 'Reset', action: handleReset, color: 'bg-seaGreen bg-opacity-70' },
-            { label: 'Highlight', action: handleHighlight, color: 'bg-seaGreen bg-opacity-80' }
-          ].map(btn => (
-            <div key={btn.label} className="relative inline-block group">
-              <button
-                onClick={btn.action}
-                className={`${btn.color} buttons`}
-              >
-                {btn.label}
-              </button>
+        <div className="flex flex-col gap-4 bg-gray-700 bg-opacity-25 p-4 rounded-3xl shadow w-10/12">
+          {/* Input Row */}
+          <div className="flex flex-wrap justify-center gap-4">
+            <div className="relative inline-block group">
+              <input
+                type="text"
+                placeholder="Value"
+                value={inputValue}
+                onChange={e => setInputValue(e.target.value)}
+                className="searchBoxPlaceholder"
+              />
               <div className="bottonHover">
-                {btn.label === 'Insert' && 'Insert value at index (or end).'}
-                {btn.label === 'Delete' && 'Delete value at index (or last).'}
-                {btn.label === 'Reset' && 'Reset to initial values.'}
-                {btn.label === 'Highlight' && 'Highlight value at index.'}
+                Enter values separated by commas or spaces.
               </div>
             </div>
-          ))}
+
+            <div className="relative inline-block group">
+              <input
+                type="number"
+                placeholder="Index"
+                value={inputIndex}
+                onChange={e => setInputIndex(e.target.value)}
+                className="searchBoxPlaceholder"
+              />
+              <div className="bottonHover">
+                Enter values separated by commas or spaces.
+              </div>
+            </div>
+          </div>
+
+          {/* Button Row */}
+          <div className="flex flex-wrap justify-center gap-2 sm:gap-3 md:gap-4">
+            {[
+              { label: 'Insert', action: handleInsertAt, color: 'bg-seaGreen bg-opacity-50' },
+              { label: 'Delete', action: handleDeleteAt, color: 'bg-seaGreen bg-opacity-60' },
+              { label: 'Reset', action: handleReset, color: 'bg-seaGreen bg-opacity-70' },
+              { label: 'Highlight', action: handleHighlight, color: 'bg-seaGreen bg-opacity-80' }
+            ].map(btn => (
+              <div key={btn.label} className="relative inline-block group">
+                <button
+                  onClick={btn.action}
+                  className={`${btn.color} bg-tan text-backgroundLighter rounded-full hover:opacity-90 transition hover:translate-x-1 hover:translate-y-1 hover:scale-110 
+                    px-3 py-1 text-sm sm:px-6 sm:py-2 sm:text-base md:px-8 md:py-2 md:text-lg lg:px-12 lg:py-2 lg:text-xl`}
+                >
+                  {btn.label}
+                </button>
+                <div className="bottonHover">
+                  {btn.label === 'Insert' && 'Insert value at index (or end).'}
+                  {btn.label === 'Delete' && 'Delete value at index (or last).'}
+                  {btn.label === 'Reset' && 'Reset to initial values.'}
+                  {btn.label === 'Highlight' && 'Highlight value at index.'}
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
 
         {error && (
