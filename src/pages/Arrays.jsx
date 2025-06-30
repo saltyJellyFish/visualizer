@@ -1,13 +1,12 @@
 // src/pages/Arrays.jsx
 import React from 'react';
-import { Link } from 'react-router-dom';
 import ArrayVisualizer from '../components/ArrayVisualizer';
+import * as Layout from '../components/layout';
 
 export default function Arrays() {
   return (
     <div className="mainContentWrapper p-10 font-ancizar">
-      <Link to="/" className="homeLink">← Back to Home
-      </Link>
+      <Layout.BackToHomeButton />
       <div className="my-20">
         <h1 className="dsaName">Arrays Visualizer</h1>
         <p className="dsaDesc">Push, pop, and highlight elements in your array.</p>
