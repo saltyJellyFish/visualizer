@@ -1,14 +1,21 @@
 // Enhanced MazeBackground with Focus Mode Toggle Button (Fixed Triangle Button Behavior)
 import React, { useRef, useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 
 const MazeBackground = () => {
+  const location = useLocation();
+  const [focusMode, setFocusMode] = useState(false);
+
+  useEffect(() => {
+    setFocusMode(location.pathname !== '/');
+  }, [location.pathname]);
+
+  const [scrollAngle, setScrollAngle] = useState(0);
+
   const canvasRef = useRef(null);
   const particlesArrayRef = useRef([]);
   const mousePositionRef = useRef({ x: undefined, y: undefined });
   const animationFrameIdRef = useRef(null);
-
-  const [focusMode, setFocusMode] = useState(false);
-  const [scrollAngle, setScrollAngle] = useState(0);
   const targetAngleRef = useRef(0);
 
   class Particle {
@@ -20,10 +27,10 @@ const MazeBackground = () => {
       this.size = Math.random() * 3 + 3.1;
       this.context = context;
 
-      this.defaultColor = 'rgba(249, 20, 86, 0.25)';
-      this.lineColorDefault = 'rgba(249, 20, 86, 0.3)';
-      this.activeColor = 'rgba(179, 218, 235, 0.65)';
-      this.lineColorActive = 'rgba(143, 201, 162, 0.3)';
+      this.activeColor = 'rgba(249, 20, 86, 0.25)';
+      this.lineColorActive = 'rgba(249, 20, 86, 0.3)';
+      this.defaultColor = 'rgba(179, 218, 235, 0.65)';
+      this.lineColorDefault = 'rgba(143, 201, 162, 0.3)';
 
       this.isActive = false;
       this.activationTime = 0;
@@ -49,7 +56,7 @@ const MazeBackground = () => {
     }
 
     update(mousePos) {
-      if (this.isActive && (Date.now() - this.activationTime > 8000)) {
+      if (this.isActive && (Date.now() - this.activationTime > 2000)) {
         this.isActive = false;
       }
 
@@ -119,7 +126,7 @@ const MazeBackground = () => {
             context.lineTo(p2.x, p2.y);
             context.strokeStyle = p2.isActive ? p1.lineColorActive : p1.lineColorDefault;
             context.lineWidth = p1.isActive ? 3.5 : 1.5;
-            context.globalAlpha = p1.isActive ? opacityBase * 1 : opacityBase * 0.9;
+            context.globalAlpha = focusMode ? (opacityBase * 0.4) : (p1.isActive ? opacityBase * 0.7 : opacityBase * 1.1);
             context.stroke();
           }
         }
@@ -154,7 +161,7 @@ const MazeBackground = () => {
           transform: `rotate(${scrollAngle}deg)`,
           transition: 'transform 0.4s ease-out rotate(30deg)',
         }
-        } 
+        }
         title='Toggle Focus Mode'>
         <svg
           viewBox="0 0 100 100"
