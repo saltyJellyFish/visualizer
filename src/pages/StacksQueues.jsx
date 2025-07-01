@@ -31,7 +31,7 @@ export default function StacksQueues() {
             >
               {m === 'stack' ? 'Stack' : 'Queue'}
             </button>
-            <div className="bottonHover"      >
+            <div className="buttonHover"      >
               {m === 'stack' ? common.stackDescription : common.queueDescription}
             </div>
           </div>

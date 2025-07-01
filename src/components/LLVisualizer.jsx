@@ -45,7 +45,7 @@ export default function LinkedListVisualizer({ initial = [], selectedType = 'Sin
   return (
     <div className="flex flex-col items-center space-y-6 mb-20">
       <div className="tanBox">
-        <div className="nbar flex-wrap gap-4">
+        <div className="nbar">
           {/* Type Selection Buttons */}
           {/*          {LinkedListTypes.map(llType => (
             <button
@@ -69,7 +69,7 @@ export default function LinkedListVisualizer({ initial = [], selectedType = 'Sin
               onChange={e => setInputValue(e.target.value)}
               className="searchBoxPlaceholder"
             />
-            <div className="bottonHover">
+            <div className="buttonHover">
               Enter values (comma or space separated).
             </div>
           </div>
@@ -83,32 +83,31 @@ export default function LinkedListVisualizer({ initial = [], selectedType = 'Sin
               onChange={e => setInsertIndex(e.target.value)}
               className="searchBoxPlaceholder w-52"
             />
-            <div className="bottonHover">
+            <div className="buttonHover">
               Optional index to insert value(s).
             </div>
           </div>
                     */}
 
-          {/* Buttons */}
           <div className="relative inline-block group">
             <button onClick={handleInsert} className="bg-opacity-50 buttons">
               Insert
             </button>
-            <div className="bottonHover">Insert value(s) at the end of the list.</div>
+            <div className="buttonHover">Insert value(s) at the end of the list.</div>
           </div>
 
           <div className="relative inline-block group">
             <button onClick={handleRemove} className="bg-opacity-70 buttons">
               Remove Head
             </button>
-            <div className="bottonHover">Removes first node from list.</div>
+            <div className="buttonHover">Removes first node from list.</div>
           </div>
 
           <div className="relative inline-block group">
             <button onClick={handleClear} className="bg-opacity-85 buttons">
               Clear All
             </button>
-            <div className="bottonHover">Clears all nodes from the list.</div>
+            <div className="buttonHover">Clears all nodes from the list.</div>
           </div>
         </div>
 

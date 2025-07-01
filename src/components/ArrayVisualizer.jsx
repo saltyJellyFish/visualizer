@@ -1,6 +1,7 @@
 // src/components/ArrayVisualizer.jsx
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+//ADD: Allow options for array type (dynamic vs compact).
 
 export default function ArrayVisualizer({ initial = [3, 1, 4, 1, 5, 9] }) {
   const [arr, setArr] = useState(initial);
@@ -81,7 +82,7 @@ export default function ArrayVisualizer({ initial = [3, 1, 4, 1, 5, 9] }) {
   return (
     <div className="flex flex-col items-center space-y-6 mb-20">
       <div className="tanBox">
-        <div className="flex flex-col gap-4 bg-gray-700 bg-opacity-25 p-4 rounded-3xl shadow w-10/12">
+        <div className="nbar">
           {/* Input Row */}
           <div className="flex flex-wrap justify-center gap-4">
             <div className="relative inline-block group">
@@ -92,7 +93,7 @@ export default function ArrayVisualizer({ initial = [3, 1, 4, 1, 5, 9] }) {
                 onChange={e => setInputValue(e.target.value)}
                 className="searchBoxPlaceholder"
               />
-              <div className="bottonHover">
+              <div className="buttonHover">
                 Enter values separated by commas or spaces.
               </div>
             </div>
@@ -105,7 +106,7 @@ export default function ArrayVisualizer({ initial = [3, 1, 4, 1, 5, 9] }) {
                 onChange={e => setInputIndex(e.target.value)}
                 className="searchBoxPlaceholder"
               />
-              <div className="bottonHover">
+              <div className="buttonHover">
                 Enter values separated by commas or spaces.
               </div>
             </div>
@@ -127,7 +128,7 @@ export default function ArrayVisualizer({ initial = [3, 1, 4, 1, 5, 9] }) {
                 >
                   {btn.label}
                 </button>
-                <div className="bottonHover">
+                <div className="buttonHover">
                   {btn.label === 'Insert' && 'Insert value at index (or end).'}
                   {btn.label === 'Delete' && 'Delete value at index (or last).'}
                   {btn.label === 'Reset' && 'Reset to initial values.'}
@@ -182,4 +183,3 @@ export default function ArrayVisualizer({ initial = [3, 1, 4, 1, 5, 9] }) {
 }
 
 
-//Could add options for array type (dynamic vs compact)
