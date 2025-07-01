@@ -1,6 +1,7 @@
 // src/components/LinkedListVisualizer.jsx
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import * as Layout from '../components/layout';
 
 export default function LinkedListVisualizer({ initial = [], selectedType = 'Singly' }) {
   const [list, setList] = useState(initial);
@@ -8,22 +9,17 @@ export default function LinkedListVisualizer({ initial = [], selectedType = 'Sin
   const [inputValue, setInputValue] = useState('');
   const [insertIndex, setInsertIndex] = useState('');
   const [error, setError] = useState('');
-  const containerRef = useRef();
-  useEffect(() => {
-    setList(initial);
-  }, [selectedType]);
+  const containerRef = useRef();  
+  useEffect(() => {setList(initial);}, [selectedType]);
+  
 
-  const handleInsert = () => {
-    setError('');
-    const vals = inputValue.split(/[\s,]+/).filter(v => v);
-    if (!vals.length) return setError('Enter one or more values to insert.');
+  const handleInsert = () => { Layout.insertion({ inputValue, setError, setInputValue });
     if (insertIndex === '') {
       setList([...list, ...vals]);
     } else {
       const idx = parseInt(insertIndex);
       if (isNaN(idx) || idx < 0 || idx > list.length) {
-        return setError('Invalid insertion index.');
-      }
+        return setError('Invalid insertion index.');}
       const newList = [...list.slice(0, idx), ...vals, ...list.slice(idx)];
       setList(newList);
     }
@@ -36,17 +32,19 @@ export default function LinkedListVisualizer({ initial = [], selectedType = 'Sin
     if (!list.length) return setError('Linked List is empty.');
     setList(list.slice(1));
   };
-
   const handleClear = () => {
     setError('');
     setList([]);
   };
-
+  const buttons = [
+    { label: 'Insert', action: handleInsert, opacity: 'bg-opacity-70', hoverText: 'Insert value(s) at the end of the list.' },
+    { label: 'Remove Head', action: handleRemove, opacity: 'bg-opacity-85', hoverText: 'Removes first node from list.' },
+    { label: 'Clear', action: handleClear, opacity: 'bg-opacity-95', hoverText: 'Clears all nodes from the list.' },
+  ];
   return (
     <div className="flex flex-col items-center space-y-6 mb-20">
       <div className="tanBox">
         <div className="nbar">
-          {/* Type Selection Buttons */}
           {/*          {LinkedListTypes.map(llType => (
             <button
               key={llType}
@@ -57,63 +55,11 @@ export default function LinkedListVisualizer({ initial = [], selectedType = 'Sin
             >
               {llType}
             </button>
-          ))}
-        */}
-
-          {/* Input */}
-          <div className="relative inline-block group">
-            <input
-              type="text"
-              placeholder="Values"
-              value={inputValue}
-              onChange={e => setInputValue(e.target.value)}
-              className="searchBoxPlaceholder"
-            />
-            <div className="buttonHover">
-              Enter values (comma or space separated).
-            </div>
-          </div>
-
-          {/*
-          <div className="relative inline-block group">
-            <input
-              type="number"
-              placeholder="Insert at index (optional)"
-              value={insertIndex}
-              onChange={e => setInsertIndex(e.target.value)}
-              className="searchBoxPlaceholder w-52"
-            />
-            <div className="buttonHover">
-              Optional index to insert value(s).
-            </div>
-          </div>
-                    */}
-
-          <div className="relative inline-block group">
-            <button onClick={handleInsert} className="bg-opacity-50 buttons">
-              Insert
-            </button>
-            <div className="buttonHover">Insert value(s) at the end of the list.</div>
-          </div>
-
-          <div className="relative inline-block group">
-            <button onClick={handleRemove} className="bg-opacity-70 buttons">
-              Remove Head
-            </button>
-            <div className="buttonHover">Removes first node from list.</div>
-          </div>
-
-          <div className="relative inline-block group">
-            <button onClick={handleClear} className="bg-opacity-85 buttons">
-              Clear All
-            </button>
-            <div className="buttonHover">Clears all nodes from the list.</div>
-          </div>
-        </div>
-
-        {/* Errors */}
+          ))} */}
+                              <Layout.InputValue inputValue={inputValue} setInputValue={setInputValue} />
+        <Layout.ButtonZ buttons={buttons} />
+</div>
         {error && <div className="errorText">{error}</div>}
-
         {/* List Visual */}
         <div
           ref={containerRef}
