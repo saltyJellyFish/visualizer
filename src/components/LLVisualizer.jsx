@@ -1,6 +1,7 @@
 // src/components/LinkedListVisualizer.jsx
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+
 export default function LinkedListVisualizer({ initial = [], selectedType = 'Singly' }) {
   const [list, setList] = useState(initial);
   const [hovered, setHovered] = useState(null);

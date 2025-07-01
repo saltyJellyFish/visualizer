@@ -180,3 +180,6 @@ export default function ArrayVisualizer({ initial = [3, 1, 4, 1, 5, 9] }) {
     </div>
   );
 }
+
+
+//Could add options for array type (dynamic vs compact)
