@@ -9,17 +9,19 @@ export default function LinkedListVisualizer({ initial = [], selectedType = 'Sin
   const [inputValue, setInputValue] = useState('');
   const [insertIndex, setInsertIndex] = useState('');
   const [error, setError] = useState('');
-  const containerRef = useRef();  
-  useEffect(() => {setList(initial);}, [selectedType]);
-  
+  const containerRef = useRef();
+  useEffect(() => { setList(initial); }, [selectedType]);
 
-  const handleInsert = () => { Layout.insertion({ inputValue, setError, setInputValue });
+
+  const handleInsert = () => {
+    Layout.insertion({ inputValue, setError, setInputValue });
     if (insertIndex === '') {
       setList([...list, ...vals]);
     } else {
       const idx = parseInt(insertIndex);
       if (isNaN(idx) || idx < 0 || idx > list.length) {
-        return setError('Invalid insertion index.');}
+        return setError('Invalid insertion index.');
+      }
       const newList = [...list.slice(0, idx), ...vals, ...list.slice(idx)];
       setList(newList);
     }
@@ -56,9 +58,9 @@ export default function LinkedListVisualizer({ initial = [], selectedType = 'Sin
               {llType}
             </button>
           ))} */}
-                              <Layout.InputValue inputValue={inputValue} setInputValue={setInputValue} />
-        <Layout.ButtonZ buttons={buttons} />
-</div>
+          <Layout.InputValue inputValue={inputValue} setInputValue={setInputValue} />
+          <Layout.ButtonZ buttons={buttons} />
+        </div>
         {error && <div className="errorText">{error}</div>}
         {/* List Visual */}
         <div

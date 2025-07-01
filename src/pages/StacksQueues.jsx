@@ -1,22 +1,23 @@
 // src/pages/StacksQueuesPage.jsx
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { StackVisualizer, QueueVisualizer }
-  from '../components/SQVisualizer.jsx'; import * as Layout from '../components/layout';
-import { stack } from 'd3';
+import { SQVisualizer } from '../components/SQVisualizer.jsx';
+import * as Layout from '../components/layout';
 import { common } from '../textContent';
-
 
 export default function StacksQueues() {
   const [mode, setMode] = useState('stack');
+
   return (
     <div className="mainContentWrapper p-10 font-ancizar">
       <Layout.BackToHomeButton />
       <div className="my-20 flex flex-col items-center">
         <h1 className="dsaName">Stacks & Queues Visualizer</h1>
-        <p className="dsaDesc"> Choose whether you want to visualize a Stack (LIFO) or a Queue (FIFO).
+        <p className="dsaDesc">
+          Choose whether you want to visualize a Stack (LIFO) or a Queue (FIFO).
         </p>
       </div>
+
       {/* Mode toggle */}
       <div className="flex space-x-8 justify-center">
         {['stack', 'queue'].map(m => (
@@ -27,23 +28,22 @@ export default function StacksQueues() {
                 ${mode === m
                   ? 'bg-seaGreen bg-opacity-80 text-backgroundLighter'
                   : 'bg-gray-200 text-gray-700 hover:bg-gray-300'}
-                  `}
+              `}
             >
               {m === 'stack' ? 'Stack' : 'Queue'}
             </button>
-            <div className="buttonHover"      >
+            <div className="buttonHover">
               {m === 'stack' ? common.stackDescription : common.queueDescription}
             </div>
           </div>
         ))}
       </div>
+
       {/* Visualizer */}
-      <div className=" cardDesc p-2">
-        {mode === 'stack'
-          ? <StackVisualizer initial={[1, 2, 3, 4]} />
-          : <QueueVisualizer initial={[1, 2, 3, 4]} />
-        }
+      <div className="cardDesc p-2">
+        <SQVisualizer type={mode} initial={[1, 2, 3, 4]} />
       </div>
+
       <footer className="footer">
         &copy; {new Date().getFullYear()} DSA Visualizer
       </footer>
