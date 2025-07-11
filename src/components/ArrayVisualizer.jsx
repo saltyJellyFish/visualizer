@@ -83,8 +83,7 @@ export default function ArrayVisualizer({ initial = [3, 1, 4, 1, 5, 9] }) {
     <div className="flex flex-col items-center space-y-6 mb-20">
       <div className="tanBox">
         <div className="nbar">
-          {/* Input Row */}
-          <div className="flex flex-wrap justify-center gap-4">
+          <div className="flex flex-col sm:flex-row gap-4 w-full items-center">
             <div className="relative inline-block group">
               <input
                 type="text"
@@ -107,13 +106,12 @@ export default function ArrayVisualizer({ initial = [3, 1, 4, 1, 5, 9] }) {
                 className="searchBoxPlaceholder"
               />
               <div className="buttonHover">
-                Enter values separated by commas or spaces.
+                Enter index for insertion/deletion operations.
               </div>
             </div>
           </div>
 
-          {/* Button Row */}
-          <div className="flex flex-wrap justify-center gap-2 sm:gap-3 md:gap-4">
+          <div className="buttonRow">
             {[
               { label: 'Insert', action: handleInsertAt, color: 'bg-seaGreen bg-opacity-50' },
               { label: 'Delete', action: handleDeleteAt, color: 'bg-seaGreen bg-opacity-60' },
@@ -123,8 +121,7 @@ export default function ArrayVisualizer({ initial = [3, 1, 4, 1, 5, 9] }) {
               <div key={btn.label} className="relative inline-block group">
                 <button
                   onClick={btn.action}
-                  className={`${btn.color} bg-tan text-backgroundLighter rounded-full hover:opacity-90 transition hover:translate-x-1 hover:translate-y-1 hover:scale-110 
-                    px-3 py-1 text-sm sm:px-6 sm:py-2 sm:text-base md:px-8 md:py-2 md:text-lg lg:px-12 lg:py-2 lg:text-xl`}
+                  className={`${btn.color} text-backgroundLighter rounded-full hover:opacity-90 transition hover:translate-x-1 hover:translate-y-1 hover:scale-110 px-4 py-2 text-base sm:text-lg flex-1 sm:flex-initial min-w-0`}
                 >
                   {btn.label}
                 </button>

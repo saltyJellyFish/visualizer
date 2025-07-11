@@ -74,17 +74,19 @@ export default function LinkedListVisualizer({ initial = [], selectedType = 'Sin
     <div className="flex flex-col items-center space-y-6 mb-20">
       <div className="tanBox">
         <div className="nbar">
-          <Layout.InputValue inputValue={inputValue} setInputValue={setInputValue} />
-          <div className="relative inline-block group">
-            <input
-              type="number"
-              placeholder="Index (optional)"
-              value={insertIndex}
-              onChange={e => setInsertIndex(e.target.value)}
-              className="searchBoxPlaceholder"
-            />
-            <div className="buttonHover">
-              Specify index for insertion/removal (leave empty for end/last).
+          <div className="flex flex-col sm:flex-row gap-4 w-full items-center">
+            <Layout.InputValue inputValue={inputValue} setInputValue={setInputValue} />
+            <div className="relative inline-block group">
+              <input
+                type="number"
+                placeholder="Index (optional)"
+                value={insertIndex}
+                onChange={e => setInsertIndex(e.target.value)}
+                className="searchBoxPlaceholder"
+              />
+              <div className="buttonHover">
+                Specify index for insertion/removal (leave empty for end/last).
+              </div>
             </div>
           </div>
           <Layout.ButtonZ buttons={buttons} />
