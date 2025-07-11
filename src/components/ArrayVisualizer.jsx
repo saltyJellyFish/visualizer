@@ -1,6 +1,7 @@
 // src/components/ArrayVisualizer.jsx
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import * as Layout from './layout';
 //ADD: Allow options for array type (dynamic vs compact).
 
 export default function ArrayVisualizer({ initial = [3, 1, 4, 1, 5, 9] }) {
@@ -161,18 +162,16 @@ export default function ArrayVisualizer({ initial = [3, 1, 4, 1, 5, 9] }) {
                 whileHover={{ y: -5, boxShadow: '0 4px 10px rgba(0,0,0,0.15)' }}
                 onHoverStart={() => setHovered(i)}
                 onHoverEnd={() => setHovered(null)}
-                className="node"
+                className="relative flex-shrink-0 w-20 h-20 bg-backgroundLighter bg-opacity-60 border border-tan border-opacity-45 rounded-full shadow-sm flex items-center justify-center"
                 style={{ scrollSnapAlign: 'center' }}
               >
-                <span className="font-ancizar text-xl">{v}</span>
-                <motion.span
-                  initial={{ scale: 0 }}
-                  animate={{ scale: i === hovered || i === highlighted ? 1.4 : 0 }}
-                  transition={{ type: 'spring', stiffness: 300, damping: 20 }}
-                  className="nodeHover"
-                >
-                  {i}
-                </motion.span>
+                <Layout.NodeDisplay 
+                  value={v} 
+                  index={i} 
+                  hovered={hovered} 
+                  highlighted={highlighted}
+                  className=""
+                />
               </motion.div>
             ))}
           </AnimatePresence>

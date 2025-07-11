@@ -78,17 +78,14 @@ export default function LinkedListVisualizer({ initial = [], selectedType = 'Sin
                 whileHover={{ y: -5, boxShadow: '0 4px 10px rgba(0,0,0,0.15)' }}
                 onHoverStart={() => setHovered(i)}
                 onHoverEnd={() => setHovered(null)}
-                className="node"
+                className="relative flex-shrink-0 w-20 h-20 bg-backgroundLighter bg-opacity-60 border border-tan border-opacity-45 rounded-full shadow-sm flex items-center justify-center"
               >
-                <span className="font-ancizar text-xl">{val}</span>
-                <motion.span
-                  initial={{ scale: 0 }}
-                  animate={{ scale: i === hovered ? 1.4 : 0 }}
-                  transition={{ type: 'spring', stiffness: 300, damping: 20 }}
-                  className="nodeHover"
-                >
-                  {i}
-                </motion.span>
+                <Layout.NodeDisplay 
+                  value={val} 
+                  index={i} 
+                  hovered={hovered}
+                  className=""
+                />
                 {selectedType === 'Singly' && i < list.length - 1 && (
                   <span className="absolute -right-6 text-2xl font-bold text-darkBlue">→</span>
                 )}
