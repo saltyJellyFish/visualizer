@@ -25,14 +25,15 @@ export default function VisualizerPage({ title, description, children }) {
     </div>
   );
 }
+//
 export function ButtonZ({ buttons }) {
   return (
-    <div className="buttonGroup">
+    <div className="flex gap-2 w-full flex-col md:flex-row">
       {buttons.map(({ label, action, opacity, hoverText }) => (
-        <div key={label} className="relative inline-block group">
+        <div key={label} className="relative group flex-1 ">
           <button
             onClick={action}
-            className={`buttons ${opacity} bg-seaGreen flex-initial min-w-0`}
+            className={`buttons ${opacity} bg-seaGreen w-full`}
           >
             {label}
           </button>
@@ -46,13 +47,13 @@ export function ButtonZ({ buttons }) {
 }
 export function InputValue({ inputValue, setInputValue }) {
   return (
-    <div className="contents">
+    <div className="relative flex flex-row sm:flex-col w-full">
       <input
         type="text"
         placeholder="Input elements"
         value={inputValue}
         onChange={e => setInputValue(e.target.value)}
-        className="searchBoxPlaceholder"
+        className="searchBoxPlaceholder w-full "
       />
       <div className="buttonHover">
         Enter values separated by commas or spaces.
@@ -62,20 +63,21 @@ export function InputValue({ inputValue, setInputValue }) {
 }
 export function InputIndex({ insertIndex, setInsertIndex }) {
   return (
-    <div className="contents">
+    <div className="relative flex flex-row sm:flex-col w-full">
       <input
-          type="number"
-          placeholder="Index (optional)"
-          value={insertIndex}
-          onChange={e => setInsertIndex(e.target.value)}
-          className="searchBoxPlaceholder"
-        />
+        type="number"
+        placeholder="Index (optional)"
+        value={insertIndex}
+        onChange={e => setInsertIndex(e.target.value)}
+        className="searchBoxPlaceholder w-full"
+      />
       <div className="buttonHover">
-                Specify index for insertion/removal (leave empty for end/last).
-              </div>
+        Specify index for insertion/removal (leave empty for end/last).
+      </div>
     </div>
   );
 }
+
 export function insertion({ inputValue, setError, setInputValue }) {
   return function(updateStructure) {
     setError('');

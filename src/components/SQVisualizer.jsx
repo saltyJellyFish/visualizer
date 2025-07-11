@@ -77,7 +77,7 @@ export function SQVisualizer({ initial = [], type = 'stack' }) {
     <div className="flex flex-col items-center space-y-6 mb-20">
       <div className="tanBox">
         <div className="nbar">
-          <div className="flex flex-col sm:flex-row gap-4 w-full items-center justify-center">
+  <div className="flex gap-4 w-full">
             <Layout.InputValue inputValue={inputValue} setInputValue={setInputValue} />
           </div>
           <Layout.ButtonZ buttons={buttons} />
@@ -90,7 +90,6 @@ export function SQVisualizer({ initial = [], type = 'stack' }) {
         ) : error ? (
           <div className="errorText">{error}</div>
         ) : null}
-
         <div
           ref={containerRef}
           className={isStack

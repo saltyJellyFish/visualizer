@@ -74,12 +74,13 @@ export default function LinkedListVisualizer({ initial = [], selectedType = 'Sin
     <div className="flex flex-col items-center space-y-6 mb-20">
       <div className="tanBox">
         <div className="nbar">
-          <div className="inputBoxes">
-            <Layout.InputValue inputValue={inputValue} setInputValue={setInputValue} />
-            <Layout.InputIndex insertIndex={insertIndex} setInsertIndex={setInsertIndex} />
-          </div>
-          <Layout.ButtonZ buttons={buttons} />
-        </div>
+  <div className="flex gap-4 w-full">
+    <Layout.InputValue inputValue={inputValue} setInputValue={setInputValue} />
+    <Layout.InputIndex insertIndex={insertIndex} setInsertIndex={setInsertIndex} />
+  </div>
+  <Layout.ButtonZ buttons={buttons} />
+</div>
+
         {error && <div className="errorText">{error}</div>}
         {/* List Visual */}
         <div
