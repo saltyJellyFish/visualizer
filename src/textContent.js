@@ -1,6 +1,7 @@
 // src/constants/textContent.js
 export const common = {
   searchInput: "Enter values separated by commas or spaces.",
+  searchIndex: "Enter index for the operation.",
 
   welcomeMessage: "Welcome to my Data Structures Visualizer!",
 

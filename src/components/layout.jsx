@@ -8,7 +8,23 @@ export function BackToHomeButton() {
     </Link>
   );
 }
-
+export default function VisualizerPage({ title, description, children }) {
+  return (
+    <div className="mainContentWrapper p-10 font-ancizar">
+      <Layout.BackToHomeButton />
+      <div className="my-20">
+        <h1 className="dsaName">{title}</h1>
+        <p className="dsaDesc">{description}</p>
+      </div>
+      <div className="cardDesc">
+        {children}
+      </div>
+      <footer className="footer mt-auto">
+        &copy; {new Date().getFullYear()} DSA Visualizer
+      </footer>
+    </div>
+  );
+}
 export function ButtonZ({ buttons }) {
   return (
     <div className="buttonGroup">
@@ -16,7 +32,7 @@ export function ButtonZ({ buttons }) {
         <div key={label} className="relative inline-block group">
           <button
             onClick={action}
-            className={`buttons ${opacity} bg-seaGreen flex-1 sm:flex-initial min-w-0`}
+            className={`buttons ${opacity} bg-seaGreen flex-initial min-w-0`}
           >
             {label}
           </button>
@@ -30,7 +46,7 @@ export function ButtonZ({ buttons }) {
 }
 export function InputValue({ inputValue, setInputValue }) {
   return (
-    <div className="relative inline-block group">
+    <div className="contents">
       <input
         type="text"
         placeholder="Input elements"
@@ -41,6 +57,22 @@ export function InputValue({ inputValue, setInputValue }) {
       <div className="buttonHover">
         Enter values separated by commas or spaces.
       </div>
+    </div>
+  );
+}
+export function InputIndex({ insertIndex, setInsertIndex }) {
+  return (
+    <div className="contents">
+      <input
+          type="number"
+          placeholder="Index (optional)"
+          value={insertIndex}
+          onChange={e => setInsertIndex(e.target.value)}
+          className="searchBoxPlaceholder"
+        />
+      <div className="buttonHover">
+                Specify index for insertion/removal (leave empty for end/last).
+              </div>
     </div>
   );
 }

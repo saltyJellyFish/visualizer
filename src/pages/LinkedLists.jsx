@@ -11,7 +11,7 @@ export default function LinkedListsPage() {
       <Layout.BackToHomeButton />
           <div className="my-20 flex flex-col items-center">
         <h1 className="dsaName">Linked List Visualizer</h1>
-        <p className="dsaDesc text-center max-w-4xl">
+        <p className="dsaDesc">
           Choose between Singly, Doubly, or Circular Linked Lists and interactively modify their structure.
         </p>
       </div>
