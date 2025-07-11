@@ -198,11 +198,17 @@ html, body {
   @apply bg-tan bg-opacity-30 py-20 rounded-3xl place-content-evenly w-11/12 shadow-md shadow-stone-300 my-12 justify-items-center
 }
 .nbar {
-  @apply flex flex-wrap bg-opacity-25 p-4 rounded-full shadow place-content-evenly w-10/12 border-solid border-stone-900
+  @apply flex flex-col sm:flex-row flex-wrap bg-opacity-25 p-4 rounded-3xl shadow justify-center items-center gap-4 w-11/12 max-w-6xl border-solid border-stone-900
 }
 .errorText {
   @apply text-lg text-center text-pinkZ border-pinkZ border-2 rounded-full px-5 py-2
 }
 .searchBoxPlaceholder {
-  @apply px-5 p-2 my-1 rounded-full focus:outline-none text-xl 
+  @apply px-4 py-2 rounded-full focus:outline-none text-base sm:text-lg w-full sm:w-auto min-w-0 flex-1 sm:flex-initial
+}
+.buttonGroup {
+  @apply flex flex-col sm:flex-row gap-2 sm:gap-3 w-full sm:w-auto
+}
+.buttonRow {
+  @apply flex flex-wrap justify-center gap-2 sm:gap-3 w-full
 }

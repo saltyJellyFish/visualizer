@@ -11,12 +11,12 @@ export function BackToHomeButton() {
 
 export function ButtonZ({ buttons }) {
   return (
-    <div className="flex space-x-4">
+    <div className="buttonGroup">
       {buttons.map(({ label, action, opacity, hoverText }) => (
         <div key={label} className="relative inline-block group">
           <button
             onClick={action}
-            className={`buttons ${opacity} bg-seaGreen`}
+            className={`buttons ${opacity} bg-seaGreen flex-1 sm:flex-initial min-w-0`}
           >
             {label}
           </button>
