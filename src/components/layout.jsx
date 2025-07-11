@@ -1,11 +1,50 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
 
 export function BackToHomeButton() {
   return (
     <Link to="/" className="homeLink">
       ← Back to Home
     </Link>
+  );
+}
+
+export function AnimatedNode({ 
+  value, 
+  index, 
+  hovered, 
+  highlighted = null,
+  className = "node",
+  valueClassName = "font-ancizar text-xl",
+  onHoverStart,
+  onHoverEnd,
+  children 
+}) {
+  const isActive = index === hovered || index === highlighted;
+  
+  return (
+    <motion.div
+      layout
+      initial={{ opacity: 0, scale: 0.8 }}
+      animate={{ opacity: 1, scale: 1 }}
+      exit={{ opacity: 0, scale: 0.8 }}
+      whileHover={{ y: -5, boxShadow: '0 4px 10px rgba(0,0,0,0.15)' }}
+      onHoverStart={() => onHoverStart?.(index)}
+      onHoverEnd={() => onHoverEnd?.(null)}
+      className={className}
+    >
+      <span className={valueClassName}>{value}</span>
+      <motion.span
+        initial={{ scale: 0 }}
+        animate={{ scale: isActive ? 1.4 : 0 }}
+        transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+        className="nodeHover"
+      >
+        {index}
+      </motion.span>
+      {children}
+    </motion.div>
   );
 }
 
