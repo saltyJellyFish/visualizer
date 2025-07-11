@@ -107,15 +107,18 @@ export function SQVisualizer({ initial = [], type = 'stack' }) {
                 whileHover={{ y: -5, boxShadow: '0 4px 10px rgba(0,0,0,0.15)' }}
                 onHoverStart={() => setHovered(i)}
                 onHoverEnd={() => setHovered(null)}
-                className="relative flex-shrink-0 w-20 h-20 bg-backgroundLighter bg-opacity-60 border border-tan border-opacity-45 rounded-full shadow-sm flex items-center justify-center"
+                className="node"
                 style={!isStack ? { scrollSnapAlign: 'center' } : {}}
               >
-                <Layout.NodeDisplay 
-                  value={v} 
-                  index={i} 
-                  hovered={hovered}
-                  className="p-3"
-                />
+                <span className="font-ancizar text-xl p-3">{v}</span>
+                <motion.span
+                  initial={{ scale: 0 }}
+                  animate={{ scale: i === hovered ? 1.4 : 0 }}
+                  transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+                  className="nodeHover"
+                >
+                  {i}
+                </motion.span>
               </motion.div>
             ))}
           </AnimatePresence>

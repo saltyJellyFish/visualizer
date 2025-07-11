@@ -1,28 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
 
 export function BackToHomeButton() {
   return (
     <Link to="/" className="homeLink">
       ← Back to Home
     </Link>
-  );
-}
-
-export function NodeDisplay({ value, index, hovered, highlighted = null, className = "node" }) {
-  return (
-    <div className={className}>
-      <span className="font-ancizar text-xl">{value}</span>
-      <motion.span
-        initial={{ scale: 0 }}
-        animate={{ scale: index === hovered || index === highlighted ? 1.4 : 0 }}
-        transition={{ type: 'spring', stiffness: 300, damping: 20 }}
-        className="nodeHover"
-      >
-        {index}
-      </motion.span>
-    </div>
   );
 }
 
