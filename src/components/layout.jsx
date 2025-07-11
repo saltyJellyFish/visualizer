@@ -26,6 +26,21 @@ export function NodeDisplay({ value, index, hovered, highlighted = null, classNa
   );
 }
 
+export function NodeContent({ value, index, hovered, highlighted = null }) {
+  return (
+    <>
+      <span className="font-ancizar text-xl">{value}</span>
+      <motion.span
+        initial={{ scale: 0 }}
+        animate={{ scale: index === hovered || index === highlighted ? 1.4 : 0 }}
+        transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+        className="nodeHover"
+      >
+        {index}
+      </motion.span>
+    </>
+  );
+}
 export function ButtonZ({ buttons }) {
   return (
     <div className="flex space-x-4">
