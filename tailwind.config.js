@@ -69,9 +69,15 @@ export default {
         "blueZ": "rgba(179, 218, 235)",
         "greenZ": 'rgba(143, 201, 162)',
         "darkGreen": "#224c4a",
-        "seaGreen": "#326c62",
+        "seaGreen": "#577375",
         "lavZ": "#d3c5ee",
-        "tan": "#89897d",
+        "tan": "#6c6c68",
+        "darkTan": "#605f53",
+      },
+      borderWidth: {
+        "1": "1px",
+        "3": "3px",
+        "5": "5px",
       },
     }
   },
