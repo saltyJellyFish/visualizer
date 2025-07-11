@@ -14,7 +14,12 @@ export default function LinkedListVisualizer({ initial = [], selectedType = 'Sin
 
 
   const handleInsert = () => {
-    Layout.insertion({ inputValue, setError, setInputValue });
+    setError('');
+    const vals = inputValue.split(/[\s,]+/).filter(v => v);
+    if (!vals.length) {
+      setError('Enter one or more values.');
+      return;
+    }
     if (insertIndex === '') {
       setList([...list, ...vals]);
     } else {
@@ -34,31 +39,54 @@ export default function LinkedListVisualizer({ initial = [], selectedType = 'Sin
     if (!list.length) return setError('Linked List is empty.');
     setList(list.slice(1));
   };
+
+  const handleRemoveAt = () => {
+    setError('');
+    if (!list.length) return setError('Linked List is empty.');
+    
+    if (insertIndex === '') {
+      // Remove last element if no index specified
+      setList(list.slice(0, -1));
+    } else {
+      const idx = parseInt(insertIndex);
+      if (isNaN(idx) || idx < 0 || idx >= list.length) {
+        return setError('Invalid removal index.');
+      }
+      const newList = [...list.slice(0, idx), ...list.slice(idx + 1)];
+      setList(newList);
+    }
+    setInsertIndex('');
+  };
+
   const handleClear = () => {
     setError('');
     setList([]);
   };
+
   const buttons = [
-    { label: 'Insert', action: handleInsert, opacity: 'bg-opacity-70', hoverText: 'Insert value(s) at the end of the list.' },
-    { label: 'Remove Head', action: handleRemove, opacity: 'bg-opacity-85', hoverText: 'Removes first node from list.' },
-    { label: 'Clear', action: handleClear, opacity: 'bg-opacity-95', hoverText: 'Clears all nodes from the list.' },
+    { label: 'Insert', action: handleInsert, opacity: 'bg-opacity-60', hoverText: 'Insert value(s) at specified index or end of list.' },
+    { label: 'Remove Head', action: handleRemove, opacity: 'bg-opacity-70', hoverText: 'Removes first node from list.' },
+    { label: 'Remove At', action: handleRemoveAt, opacity: 'bg-opacity-80', hoverText: 'Remove node at specified index or last node.' },
+    { label: 'Clear', action: handleClear, opacity: 'bg-opacity-90', hoverText: 'Clears all nodes from the list.' },
   ];
+
   return (
     <div className="flex flex-col items-center space-y-6 mb-20">
       <div className="tanBox">
         <div className="nbar">
-          {/*          {LinkedListTypes.map(llType => (
-            <button
-              key={llType}
-              onClick={() => setType(llType)}
-              className={`px-6 py-2 rounded-full text-lg font-semibold transition ${
-                type === llType ? 'bg-seaGreen bg-opacity-80 text-backgroundLighter' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
-              }`}
-            >
-              {llType}
-            </button>
-          ))} */}
           <Layout.InputValue inputValue={inputValue} setInputValue={setInputValue} />
+          <div className="relative inline-block group">
+            <input
+              type="number"
+              placeholder="Index (optional)"
+              value={insertIndex}
+              onChange={e => setInsertIndex(e.target.value)}
+              className="searchBoxPlaceholder"
+            />
+            <div className="buttonHover">
+              Specify index for insertion/removal (leave empty for end/last).
+            </div>
+          </div>
           <Layout.ButtonZ buttons={buttons} />
         </div>
         {error && <div className="errorText">{error}</div>}
@@ -89,14 +117,23 @@ export default function LinkedListVisualizer({ initial = [], selectedType = 'Sin
                 >
                   {i}
                 </motion.span>
-                {selectedType === 'Singly' && i < list.length - 1 && (
-                  <span className="absolute -right-6 text-2xl font-bold text-darkBlue">→</span>
+                {/* Connection indicators */}
+                {i < list.length - 1 && (
+                  <>
+                    {selectedType === 'Singly' && (
+                      <span className="absolute -right-6 text-2xl font-bold text-darkBlue">→</span>
+                    )}
+                    {selectedType === 'Doubly' && (
+                      <span className="absolute -right-6 text-2xl font-bold text-darkBlue">⇄</span>
+                    )}
+                    {selectedType === 'Circular' && (
+                      <span className="absolute -right-6 text-2xl font-bold text-darkBlue">→</span>
+                    )}
+                  </>
                 )}
-                {selectedType === 'Doubly' && (
-                  <span className="absolute -right-6 text-2xl font-bold text-darkBlue">⇄</span>
-                )}
-                {selectedType === 'Circular' && (
-                  <span className="absolute -right-6 text-2xl font-bold text-darkBlue">↻</span>
+                {/* Circular connection from last to first */}
+                {selectedType === 'Circular' && i === list.length - 1 && list.length > 1 && (
+                  <span className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 text-2xl font-bold text-darkBlue">↻</span>
                 )}
               </motion.div>
             ))}
