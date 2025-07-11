@@ -46,7 +46,6 @@ export function SQVisualizer({ initial = [], type = 'stack' }) {
       () => data,
       d => isStack ? d[d.length - 1] : d[0]
     );
-
   const buttons = [
     {
       label: isStack ? 'Push' : 'Enqueue',

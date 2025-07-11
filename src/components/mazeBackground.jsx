@@ -27,10 +27,11 @@ const MazeBackground = () => {
       this.size = Math.random() * 3 + 3.1;
       this.context = context;
 
-      this.activeColor = 'rgba(249, 20, 86, 0.25)';
-      this.lineColorActive = 'rgba(249, 20, 86, 0.3)';
-      this.defaultColor = 'rgba(179, 218, 235, 0.65)';
-      this.lineColorDefault = 'rgba(143, 201, 162, 0.3)';
+      this.activeColor = 'rgba(249, 20, 86, 0.3)';
+      this.lineColorActive = 'rgba(249, 20, 86, 0.35)';
+      this.defaultColor = 'rgb(101, 93, 90, 0.5)';
+      this.lineColorDefault = 'rgb(101, 93, 90, 0.3)';
+      
 
       this.isActive = false;
       this.activationTime = 0;
@@ -64,12 +65,11 @@ const MazeBackground = () => {
         const dxMouse = mousePos.x - this.x;
         const dyMouse = mousePos.y - this.y;
         const distMouse = Math.sqrt(dxMouse * dxMouse + dyMouse * dyMouse);
-        if (distMouse < 60) {
+        if (distMouse < 120) {
           this.isActive = true;
           this.activationTime = Date.now();
         }
       }
-
       const distToTargetX = this.targetX - this.x;
       const distToTargetY = this.targetY - this.y;
       this.x += distToTargetX * 0.0025 * (focusMode ? 0.25 : 1);

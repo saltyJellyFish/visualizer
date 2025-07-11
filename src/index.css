@@ -47,7 +47,7 @@ html, body {
   font-family: 'Alegreya Sans SC', 'Montserrat', serif;
   font-size: clamp(4.5rem, 10vw, 9rem);
   font-weight: 800;
-  color: #2e495c;
+  color: var(--tan);
   text-shadow: 0 2px 12px #fffdfa88;
   z-index: 2;
 }
@@ -114,7 +114,7 @@ html, body {
   font-size: clamp(1.7rem, 3.8vw, 2.35rem);
   font-weight: 670;
   transition: color 0.2s;
-  color: #2e495c;
+  color: #224c4a;
 }
 .cardBorder { 
   padding: 0; 
@@ -168,7 +168,9 @@ html, body {
   --greenZ: rgba(143, 201, 162);
   --lavZ: #d3c5ee;
   --green: #224c4a;
-  --tan: #565652;
+  --tan: #5b5551;
+  --what: rgb(101, 93, 90);
+
 
 }
 .homeLink {
@@ -196,7 +198,7 @@ html, body {
   @apply bg-tan bg-opacity-30 py-20 rounded-3xl place-content-evenly w-11/12 shadow-md shadow-stone-300 my-12 justify-items-center
 }
 .nbar {
-  @apply flex flex-wrap bg-gray-700 bg-opacity-25 p-4 rounded-full shadow place-content-evenly w-10/12 
+  @apply flex flex-wrap bg-opacity-25 p-4 rounded-full shadow place-content-evenly w-10/12 border-solid border-stone-900
 }
 .errorText {
   @apply text-lg text-center text-pinkZ border-pinkZ border-2 rounded-full px-5 py-2
