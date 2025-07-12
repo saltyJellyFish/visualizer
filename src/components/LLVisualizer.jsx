@@ -118,93 +118,6 @@ export default function LinkedListVisualizer({ initial = [], selectedType = 'Sin
     return 'node'; // Default
   };
 
-  // --- Pointer Component ---
-  const Pointer = ({ fromIndex, toIndex, type, isCircular = false }) => {
-    if (list.length === 0) return null;
-    
-    const nodeWidth = 80; // Approximate node width
-    const nodeSpacing = 48; // Gap between nodes
-    const totalNodeWidth = nodeWidth + nodeSpacing;
-    
-    let startX, startY, endX, endY, pathType;
-    
-    if (isCircular) {
-      // Circular connection from last to first
-      const containerWidth = list.length * totalNodeWidth;
-      startX = (list.length - 1) * totalNodeWidth + nodeWidth / 2;
-      startY = nodeWidth / 2;
-      endX = nodeWidth / 2;
-      endY = nodeWidth / 2;
-      pathType = 'circular';
-    } else {
-      // Regular connection
-      startX = fromIndex * totalNodeWidth + nodeWidth;
-      startY = nodeWidth / 2;
-      endX = toIndex * totalNodeWidth;
-      endY = nodeWidth / 2;
-      pathType = 'straight';
-    }
-    
-    const createPath = () => {
-      if (pathType === 'circular') {
-        // Create curved path that goes below the nodes
-        const midY = nodeWidth + 40;
-        return `M ${startX} ${startY} 
-                Q ${startX + 20} ${midY} ${(startX + endX) / 2} ${midY}
-                Q ${endX - 20} ${midY} ${endX} ${endY}`;
-      } else {
-        // Straight line with slight curve for better visibility
-        const controlY = startY - 10;
-        return `M ${startX} ${startY} 
-                Q ${(startX + endX) / 2} ${controlY} ${endX} ${endY}`;
-      }
-    };
-
-    const getArrowColor = () => {
-      switch (type) {
-        case 'next': return '#2e495c';
-        case 'prev': return '#577375';
-        case 'circular': return '#e0586f';
-        default: return '#2e495c';
-      }
-    };
-
-    return (
-      <svg
-        className="absolute top-0 left-0 pointer-events-none"
-        style={{
-          width: '100%',
-          height: '100%',
-          zIndex: 1
-        }}
-      >
-        <defs>
-          <marker
-            id={`arrowhead-${type}-${fromIndex}`}
-            markerWidth="10"
-            markerHeight="7"
-            refX="9"
-            refY="3.5"
-            orient="auto"
-          >
-            <polygon
-              points="0 0, 10 3.5, 0 7"
-              fill={getArrowColor()}
-            />
-          </marker>
-        </defs>
-        <path
-          d={createPath()}
-          stroke={getArrowColor()}
-          strokeWidth="2"
-          fill="none"
-          markerEnd={`url(#arrowhead-${type}-${fromIndex})`}
-          opacity="0.8"
-        />
-      </svg>
-    );
-  };
-
   return (
     <div className="flex flex-col items-center space-y-6 mb-20">
       <div className="tanBox">
@@ -225,78 +138,50 @@ export default function LinkedListVisualizer({ initial = [], selectedType = 'Sin
         {/* --- List Visual --- */}
         <div
           ref={containerRef}
-          className="relative flex flex-wrap items-center justify-center gap-12 m-8 p-4 overflow-auto min-h-[160px]"
+          className="relative flex flex-wrap items-center justify-center gap-4 m-8 p-4 overflow-auto min-h-[160px]"
         >
-          {/* Render Pointers */}
-          {list.length > 0 && (
-            <>
-              {/* Forward pointers for all types */}
-              {list.map((_, i) => {
-                if (i < list.length - 1) {
-                  return (
-                    <Pointer
-                      key={`next-${i}`}
-                      fromIndex={i}
-                      toIndex={i + 1}
-                      type="next"
-                    />
-                  );
-                }
-                return null;
-              })}
-              
-              {/* Backward pointers for doubly linked list */}
-              {selectedType === 'Doubly' && list.map((_, i) => {
-                if (i > 0) {
-                  return (
-                    <Pointer
-                      key={`prev-${i}`}
-                      fromIndex={i}
-                      toIndex={i - 1}
-                      type="prev"
-                    />
-                  );
-                }
-                return null;
-              })}
-              
-              {/* Circular connection from tail to head */}
-              {selectedType === 'Circular' && list.length > 1 && (
-                <Pointer
-                  key="circular"
-                  fromIndex={list.length - 1}
-                  toIndex={0}
-                  type="circular"
-                  isCircular={true}
-                />
-              )}
-            </>
-          )}
-          
           {/* Render Nodes */}
           <AnimatePresence>
             {list.map((val, i) => (
-              <motion.div
-                key={`${val}-${i}`}
-                layout
-                className={`${getNodeClass(i)} relative z-10`}
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.8 }}
-                whileHover={{ y: -5, boxShadow: '0 4px 10px rgba(0,0,0,0.15)' }}
-                onHoverStart={() => setHovered(i)}
-                onHoverEnd={() => setHovered(null)}
-              >
-                <span className="font-ancizar text-xl">{val}</span>
-                <motion.span
-                  initial={{ scale: 0 }}
-                  animate={{ scale: i === hovered ? 1.4 : 0 }}
-                  transition={{ type: 'spring', stiffness: 300, damping: 20 }}
-                  className="nodeHover"
+              <div key={`${val}-${i}`} className="relative flex items-center">
+                {/* Node */}
+                <motion.div
+                  layout
+                  className={`${getNodeClass(i)} relative z-10`}
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.8 }}
+                  whileHover={{ y: -5, boxShadow: '0 4px 10px rgba(0,0,0,0.15)' }}
+                  onHoverStart={() => setHovered(i)}
+                  onHoverEnd={() => setHovered(null)}
                 >
-                  {i}
-                </motion.span>
-              </motion.div>
+                  <span className="font-ancizar text-xl">{val}</span>
+                  <motion.span
+                    initial={{ scale: 0 }}
+                    animate={{ scale: i === hovered ? 1.4 : 0 }}
+                    transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+                    className="nodeHover"
+                  >
+                    {i}
+                  </motion.span>
+                </motion.div>
+
+                {/* Forward Arrow (for all types except last node in non-circular) */}
+                {(i < list.length - 1 || selectedType === 'Circular') && (
+                  <div className="flex items-center mx-2">
+                    <div className="w-8 h-0.5 bg-darkBlue"></div>
+                    <div className="w-0 h-0 border-l-4 border-l-darkBlue border-t-2 border-b-2 border-t-transparent border-b-transparent"></div>
+                  </div>
+                )}
+
+                {/* Backward Arrow (only for doubly linked) */}
+                {selectedType === 'Doubly' && i > 0 && (
+                  <div className="absolute -top-8 left-1/2 transform -translate-x-1/2 flex items-center">
+                    <div className="w-0 h-0 border-r-4 border-r-seaGreen border-t-2 border-b-2 border-t-transparent border-b-transparent"></div>
+                    <div className="w-8 h-0.5 bg-seaGreen"></div>
+                  </div>
+                )}
+              </div>
             ))}
             
             {/* NULL terminator for non-circular lists */}
@@ -312,6 +197,37 @@ export default function LinkedListVisualizer({ initial = [], selectedType = 'Sin
               </motion.div>
             )}
           </AnimatePresence>
+
+          {/* Circular connection from tail to head */}
+          {selectedType === 'Circular' && list.length > 1 && (
+            <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-8">
+              <svg width="200" height="40" className="overflow-visible">
+                <defs>
+                  <marker
+                    id="circular-arrow"
+                    markerWidth="8"
+                    markerHeight="6"
+                    refX="7"
+                    refY="3"
+                    orient="auto"
+                  >
+                    <polygon
+                      points="0 0, 8 3, 0 6"
+                      fill="#e0586f"
+                    />
+                  </marker>
+                </defs>
+                <path
+                  d="M 20 20 Q 100 35 180 20"
+                  stroke="#e0586f"
+                  strokeWidth="2"
+                  fill="none"
+                  markerEnd="url(#circular-arrow)"
+                />
+              </svg>
+              <div className="text-center text-sm text-pink mt-1">tail → head</div>
+            </div>
+          )}
         </div>
         
         {/* Legend */}
