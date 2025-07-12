@@ -213,3 +213,16 @@ html, body {
 .searchBoxPlaceholder {
   @apply flex-grow-0 px-6 py-2 rounded-full focus:outline-none text-xl gap-2 sm:w-auto min-w-0 sm:flex-initial
 }
+/* Add these to your existing 'node' styles in src/index.css */
+
+.node-visiting {
+  @apply border-4 border-darkBlue rounded-full min-w-16 p-3 flex items-center justify-center;
+}
+
+.node-found {
+  @apply border-4 rounded-full min-w-20 aspect-square border-seaGreen bg-[#fff9dd5a] flex items-center justify-center ;
+}
+
+.node-null {
+  @apply bg-tan bg-opacity-70 text-backgroundLighter flex items-center justify-center size-20 rounded-full shadow-md;
+}

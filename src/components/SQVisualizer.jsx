@@ -7,6 +7,7 @@ import * as Layout from '../components/layout';
 //ADD: Allow picking and moving elements around.
 //ADD: Make it save state in local storage so it persists across stack/queue changes. OR could add both stack and queue in the same page as two different visualizers.
 //ADD: Add desctiptions for S/Qs.
+//ADD: Deques
 
 export function SQVisualizer({ initial = [], type = 'stack' }) {
   const [data, setData] = useState(initial);
