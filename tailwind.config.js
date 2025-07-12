@@ -31,8 +31,8 @@ export default {
         "xs": "clamp(0.5rem, 0.5vw, 1rem)",
         "sm": "clamp(1rem, 1.1vw, 2rem)",
         "base": "clamp(1rem, 1.25vw, 1rem)",
-        "lg": "1.1vw",
-        "xl": "clamp(1rem, 1.3vw, 1.6rem)",
+        "lg": "clamp(1.3rem, 1.5vw, 1rem)",
+        "xl": "clamp(1.15rem, 1.3vw, 1.6rem)",
         "2xl": "clamp(1.1rem, 1.8vw, 1.8rem)",
         "2.5xl": "clamp(1.1rem, 2vw, 2.1rem)",
         "3xl": "4vw",
@@ -78,6 +78,9 @@ export default {
         "1": "1px",
         "3": "3px",
         "5": "5px",
+      },
+      borderRadius: {
+        "4xl": "3rem",
       },
     }
   },

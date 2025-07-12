@@ -7,6 +7,7 @@ import * as Layout from '../components/layout';
 //ADD: Allow picking and moving elements around.
 //ADD: Make it save state in local storage so it persists across stack/queue changes. OR could add both stack and queue in the same page as two different visualizers.
 //ADD: Add desctiptions for S/Qs.
+//ADD: Deques
 
 export function SQVisualizer({ initial = [], type = 'stack' }) {
   const [data, setData] = useState(initial);
@@ -51,7 +52,7 @@ export function SQVisualizer({ initial = [], type = 'stack' }) {
       label: isStack ? 'Push' : 'Enqueue',
       action: () => handleInsert(setData),
       opacity: 'bg-opacity-70',
-      hoverText: isStack
+      hoverText: isStack 
         ? 'Insert the element(s) at the top of the stack.'
         : 'Insert the element(s) to the back of the queue.',
     },
@@ -77,7 +78,7 @@ export function SQVisualizer({ initial = [], type = 'stack' }) {
     <div className="flex flex-col items-center space-y-6 mb-20">
       <div className="tanBox">
         <div className="nbar">
-          <div className="flex flex-col sm:flex-row gap-4 w-full items-center justify-center">
+  <div className="flex gap-4 w-full">
             <Layout.InputValue inputValue={inputValue} setInputValue={setInputValue} />
           </div>
           <Layout.ButtonZ buttons={buttons} />
@@ -90,12 +91,11 @@ export function SQVisualizer({ initial = [], type = 'stack' }) {
         ) : error ? (
           <div className="errorText">{error}</div>
         ) : null}
-
         <div
           ref={containerRef}
           className={isStack
-            ? 'flex flex-col-reverse items-center gap-3 mt-8 m-8 p-4'
-            : 'flex flex-wrap items-center overflow gap-3 m-8 p-4 max-h-96'}
+            ? 'flex flex-col-reverse items-center gap-2 mt-8 m-8 p-4'
+            : 'flex flex-wrap items-center overflow gap-4 m-8 p-4'}
           style={isStack ? {} : { scrollSnapType: 'x mandatory' }}
         >
           <AnimatePresence initial={false}>

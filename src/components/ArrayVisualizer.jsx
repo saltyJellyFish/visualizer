@@ -1,8 +1,12 @@
 // src/components/ArrayVisualizer.jsx
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-//ADD: Allow options for array type (dynamic vs compact).
+import * as Layout from '../components/layout';
 
+// ADD: Allow options for array type (dynamic vs compact).
+// Insert at specififc index doesn't work.
+// Highlight doesn't work.
+// Clear doesn't clear all.
 export default function ArrayVisualizer({ initial = [3, 1, 4, 1, 5, 9] }) {
   const [arr, setArr] = useState(initial);
   const [highlighted, setHighlighted] = useState(null);
@@ -10,17 +14,17 @@ export default function ArrayVisualizer({ initial = [3, 1, 4, 1, 5, 9] }) {
   const [inputValue, setInputValue] = useState('');
   const [inputIndex, setInputIndex] = useState('');
   const [error, setError] = useState('');
-  const containerRef = useRef();
+  const containerRef = useRef(null); // Corrected ref initialization
 
   useEffect(() => {
-    if (highlighted != null) {
+    if (highlighted !== null) {
       const t = setTimeout(() => setHighlighted(null), 1000);
       return () => clearTimeout(t);
     }
   }, [highlighted]);
 
-  const validIndex = idx => !isNaN(idx) && idx >= 0 && idx < arr.length;
-  const validInsertIndex = idx => !isNaN(idx) && idx >= 0 && idx <= arr.length;
+  const validIndex = (idx) => !isNaN(idx) && idx >= 0 && idx < arr.length;
+  const validInsertIndex = (idx) => !isNaN(idx) && idx >= 0 && idx <= arr.length;
 
   const handleInsertAt = () => {
     setError('');
@@ -33,7 +37,7 @@ export default function ArrayVisualizer({ initial = [3, 1, 4, 1, 5, 9] }) {
       setError(`Invalid index. Must be between 0 and ${arr.length}.`);
       return;
     }
-    setArr(a => {
+    setArr((a) => {
       const c = [...a];
       c.splice(idx, 0, inputValue);
       return c;
@@ -53,7 +57,7 @@ export default function ArrayVisualizer({ initial = [3, 1, 4, 1, 5, 9] }) {
       setError(`Invalid index. Must be between 0 and ${arr.length - 1}.`);
       return;
     }
-    setArr(a => {
+    setArr((a) => {
       const c = [...a];
       c.splice(idx, 1);
       return c;
@@ -76,64 +80,28 @@ export default function ArrayVisualizer({ initial = [3, 1, 4, 1, 5, 9] }) {
       return;
     }
     setHighlighted(idx);
-    containerRef.current.children[idx]?.scrollIntoView({ behavior: 'smooth', inline: 'center' });
+    if (containerRef.current && containerRef.current.children[idx]) {
+        containerRef.current.children[idx].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+    }
   };
+
+  const buttons = [
+    { label: 'Insert', action: handleInsertAt, opacity: 'bg-opacity-60', hoverText: 'Insert value(s) at specified index.' },
+    { label: 'Remove', action: handleDeleteAt, opacity: 'bg-opacity-70', hoverText: 'Deletes value(s) at the specified index.' },
+    { label: 'Highlight', action: handleHighlight, opacity: 'bg-opacity-80', hoverText: 'Highlights the value at specified index.' },
+    { label: 'Clear', action: handleReset, opacity: 'bg-opacity-90', hoverText: 'Clears all values from the list.' },
+  ];
 
   return (
     <div className="flex flex-col items-center space-y-6 mb-20">
       <div className="tanBox">
         <div className="nbar">
-          <div className="flex flex-col sm:flex-row gap-4 w-full items-center">
-            <div className="relative inline-block group">
-              <input
-                type="text"
-                placeholder="Value"
-                value={inputValue}
-                onChange={e => setInputValue(e.target.value)}
-                className="searchBoxPlaceholder"
-              />
-              <div className="buttonHover">
-                Enter values separated by commas or spaces.
-              </div>
-            </div>
-
-            <div className="relative inline-block group">
-              <input
-                type="number"
-                placeholder="Index"
-                value={inputIndex}
-                onChange={e => setInputIndex(e.target.value)}
-                className="searchBoxPlaceholder"
-              />
-              <div className="buttonHover">
-                Enter index for insertion/deletion operations.
-              </div>
-            </div>
+          <div className="flex gap-4 w-full">
+            {/* Corrected prop names from insertIndex to inputIndex */}
+            <Layout.InputValue inputValue={inputValue} setInputValue={setInputValue} />
+            <Layout.InputIndex inputIndex={inputIndex} setInputIndex={setInputIndex} />
           </div>
-
-          <div className="buttonRow">
-            {[
-              { label: 'Insert', action: handleInsertAt, color: 'bg-seaGreen bg-opacity-50' },
-              { label: 'Delete', action: handleDeleteAt, color: 'bg-seaGreen bg-opacity-60' },
-              { label: 'Reset', action: handleReset, color: 'bg-seaGreen bg-opacity-70' },
-              { label: 'Highlight', action: handleHighlight, color: 'bg-seaGreen bg-opacity-80' }
-            ].map(btn => (
-              <div key={btn.label} className="relative inline-block group">
-                <button
-                  onClick={btn.action}
-                  className={`${btn.color} text-backgroundLighter rounded-full hover:opacity-90 transition hover:translate-x-1 hover:translate-y-1 hover:scale-110 px-4 py-2 text-base sm:text-lg flex-1 sm:flex-initial min-w-0`}
-                >
-                  {btn.label}
-                </button>
-                <div className="buttonHover">
-                  {btn.label === 'Insert' && 'Insert value at index (or end).'}
-                  {btn.label === 'Delete' && 'Delete value at index (or last).'}
-                  {btn.label === 'Reset' && 'Reset to initial values.'}
-                  {btn.label === 'Highlight' && 'Highlight value at index.'}
-                </div>
-              </div>
-            ))}
-          </div>
+          <Layout.ButtonZ buttons={buttons} />
         </div>
 
         {error && (
@@ -144,7 +112,7 @@ export default function ArrayVisualizer({ initial = [3, 1, 4, 1, 5, 9] }) {
 
         <div
           ref={containerRef}
-          className="flex overflow-x-auto gap-4 p-8 pt-24"
+          className="flex flex-wrap items-center gap-4 m-10 overflow-visible"
           style={{ scrollSnapType: 'x mandatory' }}
         >
           <AnimatePresence initial={false}>
@@ -161,7 +129,7 @@ export default function ArrayVisualizer({ initial = [3, 1, 4, 1, 5, 9] }) {
                 className="node"
                 style={{ scrollSnapAlign: 'center' }}
               >
-                <span className="font-ancizar text-xl">{v}</span>
+                <span className="font-ancizar">{v}</span>
                 <motion.span
                   initial={{ scale: 0 }}
                   animate={{ scale: i === hovered || i === highlighted ? 1.4 : 0 }}
@@ -178,5 +146,3 @@ export default function ArrayVisualizer({ initial = [3, 1, 4, 1, 5, 9] }) {
     </div>
   );
 }
-
-

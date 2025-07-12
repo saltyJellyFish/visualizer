@@ -1,22 +1,22 @@
 // src/pages/LinkedListsPage.jsx
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 import LinkedListVisualizer from '../components/LLVisualizer';
 import * as Layout from '../components/layout';
 
 export default function LinkedListsPage() {
   const [mode, setMode] = useState('Singly');
+
   return (
     <div className="mainContentWrapper p-10 font-ancizar">
       <Layout.BackToHomeButton />
-          <div className="my-20 flex flex-col items-center">
+      <div className="my-20 flex flex-col items-center">
         <h1 className="dsaName">Linked List Visualizer</h1>
-        <p className="dsaDesc">
+        <p className="dsaDesc text-center max-w-4xl">
           Choose between Singly, Doubly, or Circular Linked Lists and interactively modify their structure.
         </p>
       </div>
       {/* Mode Toggle */}
-      <div className="flex space-x-8 justify-center">
+      <div className="flex space-x-8 justify-center mb-8">
         {['Singly', 'Doubly', 'Circular'].map(type => (
           <button
             key={type}
@@ -36,10 +36,14 @@ export default function LinkedListsPage() {
         <LinkedListVisualizer initial={["A", "B", "C"]} selectedType={mode} />
       </div>
 
-      <footer className="footer">
+      {/* Code View */}
+      <div className="flex justify-center mt-8">
+        <Layout.CodeView dataStructure={mode} />
+      </div>
+
+      <footer className="footer mt-auto">
         &copy; {new Date().getFullYear()} DSA Visualizer
       </footer>
     </div>
   );
 }
-
