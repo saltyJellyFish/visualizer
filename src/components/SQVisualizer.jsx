@@ -51,7 +51,7 @@ export function SQVisualizer({ initial = [], type = 'stack' }) {
       label: isStack ? 'Push' : 'Enqueue',
       action: () => handleInsert(setData),
       opacity: 'bg-opacity-70',
-      hoverText: isStack
+      hoverText: isStack 
         ? 'Insert the element(s) at the top of the stack.'
         : 'Insert the element(s) to the back of the queue.',
     },
@@ -93,8 +93,8 @@ export function SQVisualizer({ initial = [], type = 'stack' }) {
         <div
           ref={containerRef}
           className={isStack
-            ? 'flex flex-col-reverse items-center gap-3 mt-8 m-8 p-4'
-            : 'flex flex-wrap items-center overflow gap-3 m-8 p-4 max-h-96'}
+            ? 'flex flex-col-reverse items-center gap-2 mt-8 m-8 p-4'
+            : 'flex flex-wrap items-center overflow gap-4 m-8 p-4'}
           style={isStack ? {} : { scrollSnapType: 'x mandatory' }}
         >
           <AnimatePresence initial={false}>

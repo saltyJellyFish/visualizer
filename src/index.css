@@ -29,12 +29,13 @@ html, body {
 .mainContentWrapper {
   position: absolute; 
   background: #f8f5ea66;
-  top: 0; left: 0; right: 0%;
+  top: 0; left: 0; right: 0;
   z-index: 4;
   min-height: 100vh; 
   display: flex;
   flex-direction: column;
   align-self: center; 
+  place-content: center;
 }
 .heroContent {
   display: flex;
@@ -180,28 +181,28 @@ html, body {
   @apply text-sm text-darkBlue font-semibold hover:underline inline-block
 }
 .dsaName {
-  @apply text-4xl text-darkTan font-bold place-self-center font-ancizar 
+  @apply text-4xl text-darkTan font-bold place-content-center font-ancizar 
 }
 .dsaDesc {
-  @apply text-2xl text-darkTan font-bold place-self-center font-ancizar mt-6 max-w-4xl
+  @apply text-2xl text-darkTan font-bold place-content-center mt-6 max-w-7xl
 }
 .buttons {
-  @apply  text-backgroundLighter p-2 rounded-full hover:opacity-90 transition hover:translate-x-1 hover:translate-y-1 hover:scale-110 text-xl 
+  @apply  text-backgroundLighter p-2 rounded-full hover:opacity-90 transition hover:translate-x-1 hover:translate-y-1 hover:scale-110 text-xl max-w-52 
 }
 .buttonHover {
-    @apply pointer-events-none absolute bottom-full left-1/2 transform -translate-x-1/2 mb-5 w-max bg-darkBlue text-white text-base font-medium rounded-full py-1 px-3 opacity-0 group-hover:opacity-90 transition-opacity
+    @apply pointer-events-none absolute top-full z-10 left-1/2 transform -translate-x-1/4 mt-3 w-max bg-darkBlue text-white text-base font-medium rounded-full py-1 px-3 opacity-0 group-hover:opacity-90 transition-opacity
 }
 .nodeHover {
-  @apply absolute -top-2 -right-2 bg-pinkZ bg-opacity-60 text-white  text-xs rounded-full w-6 h-6 flex items-center justify-center
+  @apply absolute -top-2 -right-2 bg-pinkZ bg-opacity-60 text-white text-xs rounded-full w-6 h-6 flex items-center justify-center
 }
 .node {
-  @apply relative flex-shrink-0 w-20 h-20 bg-backgroundLighter bg-opacity-60 border border-tan border-opacity-45 rounded-full shadow-sm flex items-center justify-center
+  @apply relative flex-grow-0 min-w-20 aspect-square bg-backgroundLighter bg-opacity-10 border-2 border-tan rounded-full shadow-sm flex items-center justify-center text-lg sm:text-2xl text-tan mx-2
 }
 .tanBox {
   @apply bg-tan bg-opacity-30 py-20 rounded-3xl place-content-evenly w-11/12 shadow-md shadow-stone-300 my-12 justify-items-center
 }
 .nbar {
-  @apply flex flex-col bg-opacity-25 px-16 py-6 rounded-3xl justify-center items-stretch gap-4 w-11/12 max-w-6xl border-2 border-tan sm:rounded-full sm:px-32
+  @apply flex flex-col bg-opacity-25 px-12 py-8 rounded-4xl justify-center items-stretch gap-4 w-11/12 max-w-6xl border-2 border-tan sm:rounded-full sm:px-32 
 }
 .buttonGroup {
   @apply flex flex-col sm:flex-row gap-2 sm:gap-3 w-full sm:w-auto
@@ -210,5 +211,5 @@ html, body {
   @apply flex flex-wrap justify-center gap-2 sm:gap-3 w-full
 }
 .searchBoxPlaceholder {
-  @apply flex-1 px-4 py-2 rounded-full focus:outline-none text-xl gap-4 sm:w-auto min-w-0 sm:flex-initial 
+  @apply flex-grow-0 px-6 py-2 rounded-full focus:outline-none text-xl gap-2 sm:w-auto min-w-0 sm:flex-initial
 }

@@ -47,7 +47,7 @@ export function ButtonZ({ buttons }) {
 }
 export function InputValue({ inputValue, setInputValue }) {
   return (
-    <div className="relative flex flex-row sm:flex-col w-full">
+    <div className="relative flex flex-grow-0 sm:flex-col w-full">
       <input
         type="text"
         placeholder="Input elements"
@@ -63,10 +63,10 @@ export function InputValue({ inputValue, setInputValue }) {
 }
 export function InputIndex({ insertIndex, setInsertIndex }) {
   return (
-    <div className="relative flex flex-row sm:flex-col w-full">
+    <div className="relative flex flex-grow-0 sm:flex-col w-full">
       <input
         type="number"
-        placeholder="Index (optional)"
+        placeholder="Index index"
         value={insertIndex}
         onChange={e => setInsertIndex(e.target.value)}
         className="searchBoxPlaceholder w-full"

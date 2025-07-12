@@ -16,7 +16,7 @@ export default function LinkedListsPage() {
         </p>
       </div>
       {/* Mode Toggle */}
-      <div className="flex space-x-8 justify-center">
+      <div className="flex space-x-4 justify-center">
         {['Singly', 'Doubly', 'Circular'].map(type => (
           <button
             key={type}

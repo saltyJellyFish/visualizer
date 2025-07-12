@@ -71,7 +71,7 @@ export default function LinkedListVisualizer({ initial = [], selectedType = 'Sin
   ];
 
   return (
-    <div className="flex flex-col items-center space-y-6 mb-20">
+    <div className="flex flex-col items-center space-y-6 mb-20 m-2 place-content-center">
       <div className="tanBox">
         <div className="nbar">
   <div className="flex gap-4 w-full">
@@ -85,7 +85,7 @@ export default function LinkedListVisualizer({ initial = [], selectedType = 'Sin
         {/* List Visual */}
         <div
           ref={containerRef}
-          className="flex flex-wrap items-center gap-8 m-8 p-4 overflow-auto"
+          className="flex flex-wrap items-center gap-8 m-10 overflow-visible "
         >
           <AnimatePresence initial={false}>
             {list.map((val, i) => (
@@ -100,7 +100,7 @@ export default function LinkedListVisualizer({ initial = [], selectedType = 'Sin
                 onHoverEnd={() => setHovered(null)}
                 className="node"
               >
-                <span className="font-ancizar text-xl">{val}</span>
+                <span className="font-ancizar">{val}</span>
                 <motion.span
                   initial={{ scale: 0 }}
                   animate={{ scale: i === hovered ? 1.4 : 0 }}
@@ -113,20 +113,21 @@ export default function LinkedListVisualizer({ initial = [], selectedType = 'Sin
                 {i < list.length - 1 && (
                   <>
                     {selectedType === 'Singly' && (
-                      <span className="absolute -right-6 text-2xl font-bold text-darkBlue">→</span>
+                      <span className="absolute -right-14 text-[2rem] text-darkTan font-extrabold m-4">→</span>
                     )}
                     {selectedType === 'Doubly' && (
-                      <span className="absolute -right-6 text-2xl font-bold text-darkBlue">⇄</span>
+                      <span className="absolute -right-14 text-[2rem] text-darkTan font-extrabold m-4">⇄</span>
                     )}
                     {selectedType === 'Circular' && (
-                      <span className="absolute -right-6 text-2xl font-bold text-darkBlue">→</span>
+                      <span className="absolute -right-14 text-[2rem] text-darkTan font-extrabold m-4">↻</span>
                     )}
                   </>
                 )}
+
                 {/* Circular connection from last to first */}
-                {selectedType === 'Circular' && i === list.length - 1 && list.length > 1 && (
-                  <span className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 text-2xl font-bold text-darkBlue">↻</span>
-                )}
+                {/*{selectedType === 'Circular' && i === list.length - 1 && list.length > 1 && (
+                  <span className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 text-2xl font-bold text-darkTan">↻</span>
+                )}*/}
               </motion.div>
             ))}
           </AnimatePresence>

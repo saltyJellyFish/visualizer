@@ -112,7 +112,7 @@ export default function ArrayVisualizer({ initial = [3, 1, 4, 1, 5, 9] }) {
 
         <div
           ref={containerRef}
-          className="flex overflow-x-auto gap-4 p-8 pt-24"
+          className="flex flex-wrap items-center gap-4 m-10 overflow-visible"
           style={{ scrollSnapType: 'x mandatory' }}
         >
           <AnimatePresence initial={false}>
@@ -129,7 +129,7 @@ export default function ArrayVisualizer({ initial = [3, 1, 4, 1, 5, 9] }) {
                 className="node"
                 style={{ scrollSnapAlign: 'center' }}
               >
-                <span className="font-ancizar text-xl">{v}</span>
+                <span className="font-ancizar">{v}</span>
                 <motion.span
                   initial={{ scale: 0 }}
                   animate={{ scale: i === hovered || i === highlighted ? 1.4 : 0 }}
