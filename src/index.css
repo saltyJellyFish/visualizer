@@ -196,7 +196,7 @@ html, body {
   @apply absolute -top-2 -right-2 bg-pinkZ bg-opacity-60 text-white text-xs rounded-full w-6 h-6 flex items-center justify-center
 }
 .node {
-  @apply relative flex-grow-0 min-w-20 aspect-square bg-backgroundLighter bg-opacity-10 border-2 border-tan rounded-full shadow-sm flex items-center justify-center text-lg sm:text-2xl text-tan mx-2
+  @apply relative flex-grow-0 min-w-20 aspect-square bg-backgroundLighter bg-opacity-10 border-2 border-tan rounded-full shadow-sm flex items-center justify-center text-lg sm:text-2xl text-tan 
 }
 .tanBox {
   @apply bg-tan bg-opacity-30 py-20 rounded-3xl place-content-evenly w-11/12 shadow-md shadow-stone-300 my-12 justify-items-center

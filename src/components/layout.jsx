@@ -153,12 +153,9 @@ export function BackToHomeButton() {
   );
 }
 
-// Changed "export default" to "export" to fix syntax error
 export function VisualizerPage({ title, description, children }) {
   return (
     <div className="mainContentWrapper p-10 font-ancizar">
-      {/* This component uses itself, so we need to reference it 
-          without the "Layout." prefix that would be needed externally. */}
       <BackToHomeButton />
       <div className="my-20">
         <h1 className="dsaName">{title}</h1>
