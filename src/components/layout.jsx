@@ -173,9 +173,9 @@ export function VisualizerPage({ title, description, children }) {
 
 export function ButtonZ({ buttons }) {
   return (
-    <div className="flex gap-2 w-full flex-col md:flex-row">
+    <div className="flex gap-2 w-full flex-col md:flex-row justify-evenly">
       {buttons.map(({ label, action, opacity, hoverText }) => (
-        <div key={label} className="relative group flex-1 ">
+        <div key={label} className="relative group flex-grow justify-evenly">
           <button
             onClick={action}
             className={`buttons ${opacity} bg-seaGreen w-full`}

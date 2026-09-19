@@ -187,7 +187,7 @@ html, body {
   @apply text-2xl text-darkTan font-bold place-content-center mt-6 max-w-7xl
 }
 .buttons {
-  @apply  text-backgroundLighter p-2 rounded-full hover:opacity-90 transition hover:translate-x-1 hover:translate-y-1 hover:scale-110 text-xl max-w-52 
+   @apply  text-backgroundLighter p-2 rounded-full hover:opacity-90 transition hover:translate-x-1 hover:translate-y-1 hover:scale-110 text-xl justify-evenly
 }
 .buttonHover {
     @apply pointer-events-none absolute top-full z-10 left-1/2 transform -translate-x-1/4 mt-3 w-max bg-darkBlue text-white text-base font-medium rounded-full py-1 px-3 opacity-0 group-hover:opacity-90 transition-opacity
