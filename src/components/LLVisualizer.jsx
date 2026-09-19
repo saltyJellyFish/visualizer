@@ -113,7 +113,33 @@ export default function LLVisualizer({ initial = [], selectedType = "Singly" }) 
     foundIndex: null,
     operation: null,
   });
+  const containerRef = useRef();
 
+  // Reset visualizer when the list type or initial data changes
+  useEffect(() => {
+    setList(initial, true);
+    setError('');
+    setAnimationState({ running: false, currentIndex: null, targetValue: null, foundIndex: null, operation: null });
+  }, [selectedType, initial]);
+
+  // --- Animation Controller ---
+  const animateTraversal = async (targetValue) => {
+    setAnimationState({ running: true, currentIndex: null, targetValue, foundIndex: null, operation: 'search' });
+    let found = -1;
+
+    for (let i = 0; i < list.length; i++) {
+      setAnimationState(prev => ({ ...prev, currentIndex: i }));
+      await new Promise(resolve => setTimeout(resolve, ANIMATION_SPEED_MS));
+      if (list[i] === targetValue) {
+        found = i;
+        break; // Stop traversal once found
+      }
+    }
+    
+    setAnimationState(prev => ({ ...prev, foundIndex: found, running: false }));
+  };
+
+  // --- Core Functions ---
   const handleInsert = () => {
     if (animationState.running) return;
     setError("");
@@ -211,58 +237,111 @@ export default function LLVisualizer({ initial = [], selectedType = "Singly" }) 
         </div>
         {/* --- List Visual --- */}
         <div
-          className="flex flex-row items-center justify-center m-8 p-2 overflow min-h-[120px]"
-          style={{ position: "relative" }}
+          ref={containerRef}
+          className="flex flex-wrap items-center justify-center gap-12 m-8 p-4 overflow-auto min-h-[120px]"
         >
-          {/* Circular: show a loop arrow below the nodes */}
-          {list.length > 0 && selectedType === "Circular" && (
-            <CircularLoopArrow nodeCount={list.length} />
-          )}
           <AnimatePresence>
             {list.map((val, i) => (
-              <React.Fragment key={val + "-" + i}>
-                <motion.div
-                  layout
-                  className={`ll-node ${getNodeClass(i)}`}
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.8 }}
-                  whileHover={{ y: -5, boxShadow: "0 4px 10px rgba(0,0,0,0.15)" }}
-                  onHoverStart={() => setHovered(i)}
-                  onHoverEnd={() => setHovered(null)}
-                  style={{ position: "relative", zIndex: 2 }}
+              <motion.div
+                key={`${val}-${i}`}
+                layout
+                className={getNodeClass(i)}
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.8 }}
+                whileHover={{ y: -5, boxShadow: '0 4px 10px rgba(0,0,0,0.15)' }}
+                onHoverStart={() => setHovered(i)}
+                onHoverEnd={() => setHovered(null)}
+              >
+                <span className="font-ancizar text-xl">{val}</span>
+                <motion.span
+                  initial={{ scale: 0 }}
+                  animate={{ scale: i === hovered ? 1.4 : 0 }}
+                  transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+                  className="nodeHover"
                 >
-                  <span className="font-ancizar text-xl">{val}</span>
-                  <motion.span
-                    initial={{ scale: 0 }}
-                    animate={{ scale: i === hovered ? 1.4 : 0 }}
-                    transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                    className="nodeHover"
-                  >
-                    {i}
-                  </motion.span>
-                </motion.div>
-                {/* Arrow between nodes, except after last node */}
-                {i < list.length - 1 && <FlexArrow type={selectedType} />}
-              </React.Fragment>
+                  {i}
+                </motion.span>
+                {/* Connection indicators */}
+                {i < list.length && selectedType === 'Singly' && (
+                  <span className="absolute -right-8 text-2xl font-bold text-darkBlue">→</span>
+                )}
+                 {i < list.length -1 && selectedType === 'Circular' && (
+                  <span className="absolute -right-8 text-2xl font-bold text-darkBlue">→</span>
+                )}
+                {selectedType === 'Doubly' && i > 0 && (
+                  <span className="absolute -left-8 text-2xl font-bold text-darkBlue">⇄</span>
+                )}
+                {/* Circular connection from last to first */}
+                {selectedType === 'Circular' && i === list.length - 1 && list.length > 0 && (
+                  <span className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 text-2xl font-bold text-darkBlue">↻</span>
+                )}
+              </motion.div>
             ))}
-            {/* Arrow to NULL (always single arrow), after the last node, for Singly/Doubly */}
-            {list.length > 0 && selectedType !== "Circular" && (
-              <>
-                <FlexArrow type="Singly" />
-                <motion.div
-                  layout
-                  className="node-null"
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.8 }}
-                  style={{ zIndex: 2 }}
-                >
-                  <span className="font-ancizar text-xl">NULL</span>
-                </motion.div>
-              </>
+            
+            {list.length > 0 && selectedType !== 'Circular' && (
+               <motion.div
+                layout
+                className="node-null"
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.8 }}
+              >
+                <span className="font-ancizar text-xl">NULL</span>
+              </motion.div>
             )}
           </AnimatePresence>
+
+          {/* Circular connection from tail to head */}
+          {selectedType === 'Circular' && list.length > 1 && (
+            <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-8">
+              <svg width="200" height="40" className="overflow-visible">
+                <defs>
+                  <marker
+                    id="circular-arrow"
+                    markerWidth="8"
+                    markerHeight="6"
+                    refX="7"
+                    refY="3"
+                    orient="auto"
+                  >
+                    <polygon
+                      points="0 0, 8 3, 0 6"
+                      fill="#e0586f"
+                    />
+                  </marker>
+                </defs>
+                <path
+                  d="M 20 20 Q 100 35 180 20"
+                  stroke="#e0586f"
+                  strokeWidth="2"
+                  fill="none"
+                  markerEnd="url(#circular-arrow)"
+                />
+              </svg>
+              <div className="text-center text-sm text-pink mt-1">tail → head</div>
+            </div>
+          )}
+        </div>
+        
+        {/* Legend */}
+        <div className="flex justify-center mt-4 space-x-6 text-sm">
+          <div className="flex items-center space-x-2">
+            <div className="w-4 h-0.5 bg-darkBlue"></div>
+            <span>Next pointer</span>
+          </div>
+          {selectedType === 'Doubly' && (
+            <div className="flex items-center space-x-2">
+              <div className="w-4 h-0.5 bg-seaGreen"></div>
+              <span>Previous pointer</span>
+            </div>
+          )}
+          {selectedType === 'Circular' && (
+            <div className="flex items-center space-x-2">
+              <div className="w-4 h-0.5 bg-pink"></div>
+              <span>Circular pointer</span>
+            </div>
+          )}
         </div>
       </div>
     </div>
